@@ -1,0 +1,130 @@
+{
+  "updatedAt": "2026-06-03",
+  "business": {
+    "name": "Gally Family Bakery",
+    "tagline": "Family Bakery | Cake | JAX | Yulee",
+    "instagram": "https://www.instagram.com/gally_bakery?igsh=MXZ0Mzc0MHA2dTZpMg%3D%3D",
+    "phone": "+19177244288",
+    "displayPhone": "917 724 4288",
+    "serviceArea": "JAX, Yulee, St. Johns Town Center",
+    "delivery": "Delivery and free pick up",
+    "appsScriptUrl": ""
+  },
+  "categories": [
+    {
+      "id": "cheesecakes",
+      "name": "Cheesecakes",
+      "short": "Full-size creamy cheesecakes designed for easy slicing and professional service.",
+      "image": "/assets/pdf-page03-01.webp"
+    },
+    {
+      "id": "grand-cookies",
+      "name": "Grand Cookies",
+      "short": "Rich oversized cookies with indulgent fillings, available baked or ready-to-bake.",
+      "image": "/assets/pdf-page04-01.webp"
+    },
+    {
+      "id": "eclairs",
+      "name": "Eclairs",
+      "short": "Light choux pastry with custard cream and polished cafe-ready presentation.",
+      "image": "/assets/pdf-page05-01.webp"
+    },
+    {
+      "id": "macarons",
+      "name": "French Macarons",
+      "short": "Elegant almond shells with ganache, buttercream or American buttercream fillings.",
+      "image": "/assets/pdf-page06-01.webp"
+    },
+    {
+      "id": "exclusive",
+      "name": "Exclusive Cakes",
+      "short": "Signature layered desserts, including refined Honey Cake Medovik.",
+      "image": "/assets/pdf-page07-01.webp"
+    },
+    {
+      "id": "extras",
+      "name": "Additional Desserts",
+      "short": "Flexible cafe-style treats for display cases, coffee bars and everyday service.",
+      "image": "/assets/pdf-page02-03.webp"
+    }
+  ],
+  "products": [
+    {
+      "id": "classic-cheesecake",
+      "categoryId": "cheesecakes",
+      "name": "8-inch Cheesecakes",
+      "description": "Smooth, creamy full-size cheesecakes with balanced sweetness and a rich refined texture. Freezer-friendly for inventory planning.",
+      "flavors": ["Classic", "Key Lime", "Caramel", "Oreo", "Pistachio-Raspberry", "Strawberry"],
+      "formats": ["8-inch cake", "Approx. 4-4.5 inches tall", "Designed for flexible portioning"],
+      "price": "Standard $65 | 10+ $60",
+      "image": "/assets/pdf-page03-01.webp",
+      "featured": true
+    },
+    {
+      "id": "grand-cookies",
+      "categoryId": "grand-cookies",
+      "name": "Grand Cookies",
+      "description": "Large structured cookies with soft rich interiors, made for display cases, grab-and-go sales or plated coffee service.",
+      "flavors": ["Banana Cream & Nutella", "Snickers", "Oreo", "Nutella & M&M's"],
+      "formats": ["Baked ready-to-serve", "Ready-to-bake frozen", "Unbaked stores frozen up to 2 months"],
+      "price": "Baked $4.50 | 20+ $4.00 | Ready-to-bake 20+ $3.50",
+      "image": "/assets/pdf-page04-04.webp",
+      "featured": true
+    },
+    {
+      "id": "eclairs",
+      "categoryId": "eclairs",
+      "name": "Eclairs",
+      "description": "Classic French eclairs with light choux pastry, smooth custard cream and clean modern finish.",
+      "flavors": ["Vanilla", "Chocolate", "Strawberry", "Pistachio"],
+      "formats": ["Display case ready", "Freezer-friendly up to 1 month"],
+      "price": "Standard $2.70 | 20+ $2.50",
+      "image": "/assets/pdf-page05-01.webp",
+      "featured": true
+    },
+    {
+      "id": "macarons",
+      "categoryId": "macarons",
+      "name": "French Macarons",
+      "description": "Refined almond flour shells with delicate fillings, ideal as standalone desserts, plated elements or assortments.",
+      "flavors": ["Vanilla", "Chocolate", "Pistachio", "Raspberry", "Salted Caramel", "Key Lime", "Seasonal colors"],
+      "formats": ["Ganache", "Buttercream", "American buttercream", "Freezes assembled up to 1 month"],
+      "price": "Ganache $2.50 | Buttercream $2.20 | American buttercream $2.00",
+      "image": "/assets/pdf-page02-01.webp",
+      "featured": true
+    },
+    {
+      "id": "honey-cake-medovik",
+      "categoryId": "exclusive",
+      "name": "Honey Cake Medovik",
+      "description": "Eastern European honey cake with thin honey layers and smooth sour cream based filling. Elegant, balanced and restaurant-ready.",
+      "flavors": ["Honey", "Sour cream based cream"],
+      "formats": ["Whole cake", "Can be pre-sliced into 6 or 8 portions", "Frozen storage up to 30 days"],
+      "price": "Whole cake $65",
+      "image": "/assets/pdf-page07-02.webp",
+      "featured": true
+    },
+    {
+      "id": "key-lime-pie",
+      "categoryId": "extras",
+      "name": "Key Lime Pie",
+      "description": "Fresh Florida-style pie with smooth citrus filling and buttery crust for display cases and relaxed dessert menus.",
+      "flavors": ["Key Lime"],
+      "formats": ["Whole pie", "Pre-sliced portions by request"],
+      "price": "Whole pie $30",
+      "image": "/assets/pdf-page02-04.webp",
+      "featured": false
+    },
+    {
+      "id": "brownies",
+      "categoryId": "extras",
+      "name": "Brownies",
+      "description": "Rich fudgy brownies with a soft dense texture and bold cafe-friendly flavors.",
+      "flavors": ["Oreo", "Peanut Butter", "Biscoff", "Nutella M&M's", "Gluten-free option"],
+      "formats": ["Grab-and-go", "Display case ready"],
+      "price": "$4.00 each | 20+ $3.75",
+      "image": "/assets/pdf-page04-02.webp",
+      "featured": false
+    }
+  ]
+}
