@@ -341,10 +341,10 @@ function ProductCard({ product }) {
       </div>
       <div className="product-body">
         <div>
-          <p className="price">{product.price}</p>
           <h3>{product.name}</h3>
           <p>{product.description}</p>
         </div>
+        <p className="price">{product.price}</p>
       </div>
     </article>
   );

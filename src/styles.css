@@ -613,12 +613,39 @@
   .product-body {
     display: grid;
     gap: 1rem;
+    align-content: space-between;
     padding: 1rem 1.05rem 1.15rem;
   }
 
   .price {
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+    margin-block-start: .4rem;
+    padding: .72rem 1rem .72rem 2.15rem;
+    border: 1px solid rgb(131 59 71 / 20%);
+    border-radius: 999px;
+    background:
+      linear-gradient(135deg, rgb(255 248 239 / 96%), rgb(248 215 208 / 58%));
     color: var(--berry) !important;
+    font-size: .9rem;
     font-weight: 900;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+    box-shadow: 0 12px 32px rgb(61 41 36 / 9%);
+  }
+
+  .price::before {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: .78rem;
+    width: .72rem;
+    aspect-ratio: 1;
+    border: 2px solid rgb(131 59 71 / 34%);
+    border-radius: 50%;
+    background: white;
+    content: "";
+    transform: translateY(-50%);
   }
 
   .tag-editor {
