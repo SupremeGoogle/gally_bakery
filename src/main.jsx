@@ -292,19 +292,42 @@ function HomePage({ catalog, setCatalog }) {
       </main>
 
       <footer className="footer">
-        <div className="footer-brand">
-          <span className="brand-mark">G</span>
-          <div>
-            <strong>Gally Family Bakery</strong>
-            <span>{business.tagline}</span>
+        <div className="footer-main">
+          <div className="footer-brand">
+            <span className="brand-mark">G</span>
+            <div>
+              <strong>Gally Family Bakery</strong>
+              <span>{business.tagline}</span>
+            </div>
           </div>
+          <p>Handmade desserts for cafes, restaurants and sweet celebrations. Baked with love, consistency and a family touch.</p>
         </div>
-        <div className="footer-links" aria-label="Footer contacts">
+
+        <nav className="footer-column" aria-label="Footer menu">
+          <strong>Menu</strong>
+          <a href="#menu">Desserts</a>
+          <a href="#partners">Partners</a>
+          <a href="#contact">Order</a>
+        </nav>
+
+        <div className="footer-column">
+          <strong>Contact</strong>
           <a href={`tel:${business.phone}`}>{business.displayPhone}</a>
           <a href={business.instagram} target="_blank" rel="noreferrer">Instagram</a>
           <a href="#/privacy">Privacy consent</a>
         </div>
-        <p>{business.delivery} | {business.serviceArea}</p>
+
+        <div className="footer-column">
+          <strong>Service</strong>
+          <span>{business.delivery}</span>
+          <span>{business.serviceArea}</span>
+        </div>
+
+        <div className="footer-bottom">
+          <span>Est. 2020</span>
+          <span>Licensed commercial kitchen in Florida</span>
+          <span>Gally Family Bakery</span>
+        </div>
       </footer>
     </>
   );
