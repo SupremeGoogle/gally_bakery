@@ -362,6 +362,10 @@
     margin-block-end: 2rem;
   }
 
+  .work-with-us > div:first-child {
+    max-width: 48rem;
+  }
+
   .about,
   .work-with-us,
   .contact-section {
@@ -643,7 +647,7 @@
   }
 
   .work-with-us {
-    background: var(--cream);
+    background: transparent;
   }
 
   .benefit-grid {
