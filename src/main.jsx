@@ -172,10 +172,12 @@ function HomePage({ catalog, setCatalog }) {
               </a>
             </div>
           </div>
-          <div className="hero-media reveal delay-1" aria-label="Gally Bakery dessert collage">
+          <div className="hero-media reveal delay-1" aria-label="Gally Bakery dessert photos">
             <img className="hero-main-photo" src={asset('/assets/pdf-page02-02.webp')} alt="Colorful eclairs from Gally Bakery" fetchPriority="high" />
-            <img className="hero-mini-photo one" src={asset('/assets/pdf-page06-01.webp')} alt="Pink macarons from Gally Bakery" />
-            <img className="hero-mini-photo two" src={asset('/assets/pdf-page04-04.webp')} alt="Grand cookie from Gally Bakery" />
+            <div className="hero-side-gallery" aria-hidden="true">
+              <img src={asset('/assets/pdf-page06-01.webp')} alt="" />
+              <img src={asset('/assets/pdf-page04-04.webp')} alt="" />
+            </div>
             <div className="floating-note">
               <Sparkles size={18} />
               Small-batch, freezer-friendly, menu-ready
