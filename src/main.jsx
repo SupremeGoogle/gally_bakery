@@ -28,7 +28,10 @@ import './styles.css';
 
 const STORAGE_KEY = 'gally_bakery_catalog_v1';
 const SETTINGS_KEY = 'gally_bakery_admin_settings_v1';
-const ADMIN_PASSWORD = 'gally062026';
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || 'gally062026';
+const DEFAULT_APPS_SCRIPT_URL =
+  import.meta.env.VITE_APPS_SCRIPT_URL ||
+  'https://script.google.com/macros/s/AKfycbwWFpv1tk_aRmyad2Lahv30yX_3KDeNzc0fI1gHHlD59Mk7pmYF7c5tSGy8SH_h04lc/exec';
 
 const emptyProduct = {
   id: '',
@@ -88,11 +91,11 @@ function readSettings() {
       repo: 'gally_bakery',
       branch: 'main',
       token: '',
-      appsScriptUrl: '',
+      appsScriptUrl: DEFAULT_APPS_SCRIPT_URL,
       ...(JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}),
     };
   } catch {
-    return { owner: 'SupremeGoogle', repo: 'gally_bakery', branch: 'main', token: '', appsScriptUrl: '' };
+    return { owner: 'SupremeGoogle', repo: 'gally_bakery', branch: 'main', token: '', appsScriptUrl: DEFAULT_APPS_SCRIPT_URL };
   }
 }
 
@@ -125,7 +128,7 @@ function HomePage({ catalog, setCatalog }) {
   const settings = readSettings();
   const business = {
     ...catalog.business,
-    appsScriptUrl: settings.appsScriptUrl || catalog.business.appsScriptUrl,
+    appsScriptUrl: settings.appsScriptUrl || DEFAULT_APPS_SCRIPT_URL || catalog.business.appsScriptUrl,
   };
 
   return (
@@ -476,6 +479,31 @@ function AdminPage({ catalog, setCatalog }) {
   }
 
   async function saveToGithub() {
+    try {
+      setStatus('Saving through Vercel API...');
+      const serverResponse = await fetch('/api/update-catalog', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${ADMIN_PASSWORD}`,
+        },
+        body: JSON.stringify({ catalog }),
+      });
+      const serverJson = await serverResponse.json();
+      if (serverResponse.ok) {
+        setStatus(`Saved to GitHub through Vercel API. Commit: ${serverJson.commit?.slice(0, 7) || 'created'}`);
+        return;
+      }
+      if (serverResponse.status !== 404 && serverResponse.status !== 500) {
+        throw new Error(serverJson.error || 'Server publishing failed');
+      }
+    } catch (error) {
+      if (!settings.token) {
+        setStatus(`Server publishing is unavailable: ${error.message}. Add Vercel env variables or use a local GitHub token.`);
+        return;
+      }
+    }
+
     if (!settings.token) {
       setStatus('Add a GitHub token first.');
       return;

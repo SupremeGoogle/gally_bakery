@@ -35,6 +35,25 @@ For GitHub save, create a fine-grained token with Contents read/write access to 
 
 Requests will be appended to a sheet named `Requests`.
 
+Current Google Sheet:
+
+`https://docs.google.com/spreadsheets/d/1OCYrc2V3IM1HqL3jadGNBk65GcPZclYKNXPMkWpHMyI/edit?gid=0#gid=0`
+
+## Vercel environment variables
+
+Use these variables in Vercel Project Settings -> Environment Variables:
+
+```bash
+VITE_APPS_SCRIPT_URL=https://script.google.com/macros/s/AKfycbwWFpv1tk_aRmyad2Lahv30yX_3KDeNzc0fI1gHHlD59Mk7pmYF7c5tSGy8SH_h04lc/exec
+ADMIN_PASSWORD=gally062026
+GITHUB_TOKEN=your_new_github_token
+GITHUB_OWNER=SupremeGoogle
+GITHUB_REPO=gally_bakery
+GITHUB_BRANCH=main
+```
+
+Do not commit a real GitHub token to the repository. Store it only in Vercel environment variables.
+
 ## Build
 
 ```bash

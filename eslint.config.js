@@ -7,7 +7,15 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 export default [
   { ignores: ['dist', 'public/scripts/google-apps-script.js', 'scripts/google-apps-script.js'] },
   {
-    files: ['**/*.{js,jsx}'],
+    files: ['api/**/*.js'],
+    languageOptions: {
+      ecmaVersion: 2024,
+      globals: globals.node,
+      sourceType: 'module',
+    },
+  },
+  {
+    files: ['src/**/*.{js,jsx}', '*.js'],
     languageOptions: {
       ecmaVersion: 2024,
       globals: globals.browser,
