@@ -100,22 +100,27 @@ function readSettings() {
 }
 
 function App() {
-  const [route, setRoute] = useState(location.hash || '#/');
+  const getRoute = () => location.hash || location.pathname || '/';
+  const [route, setRoute] = useState(getRoute);
   const [catalog, setCatalog] = useState(readCatalog);
 
   useEffect(() => {
-    const onHash = () => setRoute(location.hash || '#/');
-    addEventListener('hashchange', onHash);
-    return () => removeEventListener('hashchange', onHash);
+    const onRoute = () => setRoute(getRoute());
+    addEventListener('hashchange', onRoute);
+    addEventListener('popstate', onRoute);
+    return () => {
+      removeEventListener('hashchange', onRoute);
+      removeEventListener('popstate', onRoute);
+    };
   }, []);
 
   useEffect(() => saveCatalog(catalog), [catalog]);
 
-  if (route.startsWith('#/admin')) {
+  if (route.startsWith('#/admin') || route === '/admin' || route.startsWith('/admin/')) {
     return <AdminPage catalog={catalog} setCatalog={setCatalog} />;
   }
 
-  if (route.startsWith('#/privacy')) {
+  if (route.startsWith('#/privacy') || route === '/privacy' || route.startsWith('/privacy/')) {
     return <PrivacyPage business={catalog.business} />;
   }
 
