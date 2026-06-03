@@ -274,14 +274,11 @@
 
   .hero-media {
     position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(6.5rem, .36fr);
-    gap: .75rem;
     overflow: hidden;
     border: 1px solid rgb(255 255 255 / 64%);
     border-radius: var(--soft-radius);
     box-shadow: 0 28px 80px rgb(61 41 36 / 18%);
-    aspect-ratio: 5 / 4;
+    aspect-ratio: 4 / 3;
     padding: .55rem;
     background: rgb(255 255 255 / 54%);
     backdrop-filter: blur(18px);
@@ -293,20 +290,6 @@
     object-fit: cover;
     border-radius: calc(var(--soft-radius) - .65rem);
     animation: gentle-zoom 9s ease-in-out infinite alternate;
-  }
-
-  .hero-side-gallery {
-    display: grid;
-    gap: .75rem;
-    min-width: 0;
-  }
-
-  .hero-side-gallery img {
-    width: 100%;
-    min-width: 0;
-    height: 100%;
-    object-fit: cover;
-    border-radius: calc(var(--soft-radius) - .8rem);
   }
 
   .floating-note {
@@ -1306,22 +1289,11 @@
     }
 
     .hero-media {
-      grid-template-columns: 1fr;
       margin-inline: 0;
-      aspect-ratio: auto;
     }
 
     .hero-main-photo {
       aspect-ratio: 4 / 3;
-      height: auto;
-    }
-
-    .hero-side-gallery {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .hero-side-gallery img {
-      aspect-ratio: 1.35;
       height: auto;
     }
 
