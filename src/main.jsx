@@ -202,20 +202,6 @@ function HomePage({ catalog, setCatalog }) {
           </div>
         </section>
 
-        <section className="gallery-strip" aria-label="Dessert gallery">
-          {[
-            ['/assets/pdf-page03-01.webp', 'Cheesecake on a cake stand'],
-            ['/assets/pdf-page02-01.webp', 'Stacked macarons'],
-            ['/assets/pdf-page04-01.webp', 'Chocolate grand cookie'],
-            ['/assets/pdf-page07-02.webp', 'Honey cake with berries'],
-            ['/assets/pdf-page05-01.webp', 'Assorted eclairs'],
-          ].map(([src, alt]) => (
-            <figure className="gallery-tile" key={src}>
-              <img src={asset(src)} alt={alt} loading="lazy" />
-            </figure>
-          ))}
-        </section>
-
         <section className="section" id="menu">
           <div className="section-heading reveal">
             <p className="eyebrow">Signature Categories</p>
