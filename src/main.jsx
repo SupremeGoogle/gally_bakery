@@ -314,11 +314,6 @@ function ProductCard({ product }) {
           <h3>{product.name}</h3>
           <p>{product.description}</p>
         </div>
-        <div className="chip-list">
-          {product.flavors.slice(0, 6).map((flavor) => (
-            <span key={flavor}>{flavor}</span>
-          ))}
-        </div>
       </div>
     </article>
   );

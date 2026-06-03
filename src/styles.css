@@ -604,14 +604,12 @@
     font-weight: 900;
   }
 
-  .chip-list,
   .tag-editor {
     display: flex;
     flex-wrap: wrap;
     gap: .45rem;
   }
 
-  .chip-list span,
   .tag-editor button {
     padding: .42rem .62rem;
     border: 1px solid var(--line);
