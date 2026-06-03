@@ -28,7 +28,7 @@ const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || 'gally062026';
 const REQUESTS_SHEET_URL = 'https://docs.google.com/spreadsheets/d/1OCYrc2V3IM1HqL3jadGNBk65GcPZclYKNXPMkWpHMyI/edit?gid=0#gid=0';
 const DEFAULT_APPS_SCRIPT_URL =
   import.meta.env.VITE_APPS_SCRIPT_URL ||
-  'https://script.google.com/macros/s/AKfycbwWFpv1tk_aRmyad2Lahv30yX_3KDeNzc0fI1gHHlD59Mk7pmYF7c5tSGy8SH_h04lc/exec';
+  'https://script.google.com/macros/s/AKfycbyb_ngktqiXqceXihrB2kOaSAsQvdBsys6yNNgCUtv9gfT1MNi3-sqbZWbdrblisVswcg/exec';
 
 const emptyProduct = {
   id: '',

@@ -44,8 +44,8 @@ Current Google Sheet:
 Use these variables in Vercel Project Settings -> Environment Variables:
 
 ```bash
-VITE_APPS_SCRIPT_URL=https://script.google.com/macros/s/AKfycbwWFpv1tk_aRmyad2Lahv30yX_3KDeNzc0fI1gHHlD59Mk7pmYF7c5tSGy8SH_h04lc/exec
-APPS_SCRIPT_URL=https://script.google.com/macros/s/AKfycbwWFpv1tk_aRmyad2Lahv30yX_3KDeNzc0fI1gHHlD59Mk7pmYF7c5tSGy8SH_h04lc/exec
+VITE_APPS_SCRIPT_URL=https://script.google.com/macros/s/AKfycbyb_ngktqiXqceXihrB2kOaSAsQvdBsys6yNNgCUtv9gfT1MNi3-sqbZWbdrblisVswcg/exec
+APPS_SCRIPT_URL=https://script.google.com/macros/s/AKfycbyb_ngktqiXqceXihrB2kOaSAsQvdBsys6yNNgCUtv9gfT1MNi3-sqbZWbdrblisVswcg/exec
 ADMIN_PASSWORD=gally062026
 GITHUB_TOKEN=your_new_github_token
 GITHUB_OWNER=SupremeGoogle

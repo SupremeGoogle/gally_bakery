@@ -1,8 +1,16 @@
 const DEFAULT_APPS_SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbwWFpv1tk_aRmyad2Lahv30yX_3KDeNzc0fI1gHHlD59Mk7pmYF7c5tSGy8SH_h04lc/exec';
+  'https://script.google.com/macros/s/AKfycbyb_ngktqiXqceXihrB2kOaSAsQvdBsys6yNNgCUtv9gfT1MNi3-sqbZWbdrblisVswcg/exec';
 
 function looksLikeAccessDenied(text) {
-  return /access|zugriff|доступ|permission|berechtigung|need access/i.test(text);
+  return /access|zugriff|доступ|permission|berechtigung|need access|not found|seite nicht gefunden|nicht geöffnet|file cannot/i.test(text);
+}
+
+function isSuccessfulScriptResponse(text) {
+  try {
+    return JSON.parse(text).ok === true;
+  } catch {
+    return false;
+  }
 }
 
 export default async function handler(request, response) {
@@ -27,9 +35,9 @@ export default async function handler(request, response) {
     });
     const text = await scriptResponse.text();
 
-    if (!scriptResponse.ok || looksLikeAccessDenied(text)) {
+    if (!scriptResponse.ok || looksLikeAccessDenied(text) || !isSuccessfulScriptResponse(text)) {
       return response.status(502).json({
-        error: 'Google Apps Script is not publicly accessible. Deploy it as a Web App with access set to Anyone.',
+        error: 'Google Apps Script URL is not available. Check the Web App link and deploy access.',
       });
     }
 
