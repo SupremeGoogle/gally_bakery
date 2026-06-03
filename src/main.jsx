@@ -122,7 +122,7 @@ function HomePage({ catalog, setCatalog }) {
       </header>
 
       <main id="top">
-        <section className="hero" style={{ '--hero-bg': `url(${asset('/assets/pdf-page05-01.webp')})` }}>
+        <section className="hero" style={{ '--hero-bg': `url(${asset('/assets/gally-hero-creative.webp')})` }}>
           <div className="hero-copy reveal">
             <p className="eyebrow">Est. 2020 | Family Bakery</p>
             <h1>Handmade desserts for cafes, restaurants and sweet celebrations.</h1>
