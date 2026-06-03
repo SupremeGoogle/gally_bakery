@@ -129,7 +129,7 @@ function HomePage({ catalog, setCatalog }) {
       </header>
 
       <main id="top">
-        <section className="hero">
+        <section className="hero" style={{ '--hero-bg': `url(${asset('/assets/gally-hero-creative.webp')})` }}>
           <div className="hero-copy reveal">
             <p className="eyebrow">Est. 2020 | Family Bakery</p>
             <h1>Handmade desserts for cafes, restaurants and sweet celebrations.</h1>
@@ -150,12 +150,9 @@ function HomePage({ catalog, setCatalog }) {
               </a>
             </div>
           </div>
-          <div className="hero-visual">
-            <img src={asset('/assets/gally-hero-creative.webp')} alt="Gally Family Bakery" />
-            <div className="floating-note reveal delay-1">
-              <Sparkles size={18} />
-              Small-batch, freezer-friendly, menu-ready
-            </div>
+          <div className="floating-note reveal delay-1">
+            <Sparkles size={18} />
+            Small-batch, freezer-friendly, menu-ready
           </div>
         </section>
 
