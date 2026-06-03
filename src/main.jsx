@@ -158,6 +158,11 @@ function HomePage({ catalog, setCatalog }) {
             <p>
               I&apos;m Gally, a pastry enthusiast baking treats with love and a smile. Delivery and free pick up around JAX, Yulee and St. Johns Town Center.
             </p>
+            <div className="hero-stats" aria-label="Bakery highlights">
+              <span><strong>2020</strong> baking since</span>
+              <span><strong>FL</strong> licensed kitchen</span>
+              <span><strong>15+</strong> menu options</span>
+            </div>
             <div className="hero-actions">
               <a className="button primary" href="#contact">
                 Let&apos;s bake it <ChevronRight size={18} />
@@ -167,8 +172,10 @@ function HomePage({ catalog, setCatalog }) {
               </a>
             </div>
           </div>
-          <div className="hero-media reveal delay-1" aria-label="Gally Bakery desserts">
-            <img src={asset('/assets/pdf-page02-02.webp')} alt="Colorful eclairs from Gally Bakery" fetchPriority="high" />
+          <div className="hero-media reveal delay-1" aria-label="Gally Bakery dessert collage">
+            <img className="hero-main-photo" src={asset('/assets/pdf-page02-02.webp')} alt="Colorful eclairs from Gally Bakery" fetchPriority="high" />
+            <img className="hero-mini-photo one" src={asset('/assets/pdf-page06-01.webp')} alt="Pink macarons from Gally Bakery" />
+            <img className="hero-mini-photo two" src={asset('/assets/pdf-page04-04.webp')} alt="Grand cookie from Gally Bakery" />
             <div className="floating-note">
               <Sparkles size={18} />
               Small-batch, freezer-friendly, menu-ready
@@ -187,9 +194,26 @@ function HomePage({ catalog, setCatalog }) {
             <p className="eyebrow">About Us</p>
             <h2>Rooted in New York, now baking under the Florida sun.</h2>
           </div>
-          <p>
-            Gally Bakery is a family-owned business that began in 2020 as a passion for sweet gifts. Since 2023, our family has been based in Florida, creating handcrafted desserts for partners who value quality, freshness and personal collaboration.
-          </p>
+          <div className="about-card">
+            <p>
+              Gally Bakery is a family-owned business that began in 2020 as a passion for sweet gifts. Since 2023, our family has been based in Florida, creating handcrafted desserts for partners who value quality, freshness and personal collaboration.
+            </p>
+            <div className="signature-line">Baked with love and a smile.</div>
+          </div>
+        </section>
+
+        <section className="gallery-strip" aria-label="Dessert gallery">
+          {[
+            ['/assets/pdf-page03-01.webp', 'Cheesecake on a cake stand'],
+            ['/assets/pdf-page02-01.webp', 'Stacked macarons'],
+            ['/assets/pdf-page04-01.webp', 'Chocolate grand cookie'],
+            ['/assets/pdf-page07-02.webp', 'Honey cake with berries'],
+            ['/assets/pdf-page05-01.webp', 'Assorted eclairs'],
+          ].map(([src, alt]) => (
+            <figure className="gallery-tile" key={src}>
+              <img src={asset(src)} alt={alt} loading="lazy" />
+            </figure>
+          ))}
         </section>
 
         <section className="section" id="menu">
@@ -200,8 +224,11 @@ function HomePage({ catalog, setCatalog }) {
           <div className="category-grid">
             {catalog.categories.map((category, index) => (
               <article className="category-card reveal" style={{ '--delay': `${index * 70}ms` }} key={category.id}>
-                <img src={asset(category.image)} alt={`${category.name} by Gally Bakery`} loading="lazy" />
-                <div>
+                <div className="category-media">
+                  <img src={asset(category.image)} alt={`${category.name} by Gally Bakery`} loading="lazy" />
+                </div>
+                <div className="category-content">
+                  <span>{String(index + 1).padStart(2, '0')}</span>
                   <h3>{category.name}</h3>
                   <p>{category.short}</p>
                 </div>
@@ -214,6 +241,11 @@ function HomePage({ catalog, setCatalog }) {
           <div className="section-heading reveal">
             <p className="eyebrow">Menu Highlights</p>
             <h2>Favorite treats with clean service details.</h2>
+          </div>
+          <div className="shelf-labels" aria-hidden="true">
+            <span>ready-to-serve</span>
+            <span>small batch</span>
+            <span>custom colors</span>
           </div>
           <div className="product-rail" aria-label="Featured products">
             {featured.map((product) => (
@@ -271,7 +303,9 @@ function HomePage({ catalog, setCatalog }) {
 function ProductCard({ product }) {
   return (
     <article className="product-card">
-      <img src={asset(product.image)} alt={product.name} loading="lazy" />
+      <div className="product-image-wrap">
+        <img src={asset(product.image)} alt={product.name} loading="lazy" />
+      </div>
       <div className="product-body">
         <div>
           <p className="price">{product.price}</p>
