@@ -145,7 +145,6 @@ function HomePage({ catalog, setCatalog }) {
           <a href="#menu">Menu</a>
           <a href="#partners">Partners</a>
           <a href="#contact">Order</a>
-          <a href="#/privacy">Privacy</a>
         </nav>
       </header>
 

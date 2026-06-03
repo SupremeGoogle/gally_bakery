@@ -856,6 +856,12 @@
     padding: clamp(1rem, 4vw, 4rem);
   }
 
+  .legal-page {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+  }
+
   .back-link {
     display: inline-flex;
     gap: .45rem;
@@ -871,6 +877,7 @@
   }
 
   .legal-card {
+    width: min(100%, 56rem);
     max-width: 56rem;
     padding: clamp(1.2rem, 4vw, 3rem);
   }
