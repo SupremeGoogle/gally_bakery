@@ -146,7 +146,6 @@ function HomePage({ catalog, setCatalog }) {
           <a href="#partners">Partners</a>
           <a href="#contact">Order</a>
           <a href="#/privacy">Privacy</a>
-          <a href="#/admin">Admin</a>
         </nav>
       </header>
 
@@ -294,9 +293,19 @@ function HomePage({ catalog, setCatalog }) {
       </main>
 
       <footer className="footer">
-        <span>Gally Family Bakery</span>
-        <span>{business.delivery}</span>
-        <a href="#/admin">Admin</a>
+        <div className="footer-brand">
+          <span className="brand-mark">G</span>
+          <div>
+            <strong>Gally Family Bakery</strong>
+            <span>{business.tagline}</span>
+          </div>
+        </div>
+        <div className="footer-links" aria-label="Footer contacts">
+          <a href={`tel:${business.phone}`}>{business.displayPhone}</a>
+          <a href={business.instagram} target="_blank" rel="noreferrer">Instagram</a>
+          <a href="#/privacy">Privacy consent</a>
+        </div>
+        <p>{business.delivery} | {business.serviceArea}</p>
       </footer>
     </>
   );

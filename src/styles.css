@@ -780,11 +780,61 @@
   }
 
   .footer {
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1.4rem clamp(1rem, 4vw, 4rem);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 1.25rem;
+    width: calc(100% - 2rem);
+    max-width: var(--shell);
+    margin: 0 auto 1rem;
+    padding: 1.4rem;
+    border-radius: var(--soft-radius);
     background: var(--ink);
     color: var(--cream);
+  }
+
+  .footer-brand {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+  }
+
+  .footer-brand .brand-mark {
+    background: var(--cream);
+    color: var(--cocoa);
+  }
+
+  .footer-brand div {
+    display: grid;
+    gap: .15rem;
+  }
+
+  .footer-brand strong {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 1.2rem;
+  }
+
+  .footer-brand span:not(.brand-mark),
+  .footer p {
+    color: rgb(255 248 239 / 72%);
+    font-size: .9rem;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: .6rem 1rem;
+    font-weight: 800;
+  }
+
+  .footer-links a {
+    color: var(--cream);
+    text-decoration: none;
+  }
+
+  .footer p {
+    grid-column: 1 / -1;
   }
 
   .legal-page,
