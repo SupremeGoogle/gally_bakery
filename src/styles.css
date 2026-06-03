@@ -169,22 +169,46 @@
   }
 
   .hero {
+    position: relative;
+    isolation: isolate;
     display: grid;
-    grid-template-columns: minmax(0, .9fr) minmax(20rem, 1.1fr);
-    gap: clamp(2rem, 5vw, 4.5rem);
+    grid-template-columns: minmax(0, 42rem) minmax(12rem, 1fr);
+    gap: clamp(1.5rem, 5vw, 4rem);
     width: calc(100% - 2rem);
     max-width: var(--shell);
     margin: 0 auto;
-    padding: clamp(3rem, 6vw, 5rem) 0 clamp(2.5rem, 5vw, 4rem);
-    align-items: center;
+    min-height: min(740px, calc(100dvh - 7rem));
+    padding: clamp(1rem, 4vw, 3rem);
+    align-items: end;
+    overflow: hidden;
+    border-radius: var(--soft-radius);
+    background:
+      linear-gradient(90deg, rgb(246 239 230 / 92%) 0%, rgb(246 239 230 / 72%) 40%, rgb(246 239 230 / 12%) 100%),
+      linear-gradient(180deg, rgb(61 41 36 / 8%), rgb(61 41 36 / 18%)),
+      var(--hero-bg) center / cover no-repeat;
+    box-shadow: 0 30px 90px rgb(68 47 35 / 13%);
   }
 
   .hero::before {
-    content: none;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(circle at 16% 18%, rgb(255 255 255 / 72%), transparent 24rem);
+    content: "";
   }
 
   .hero-copy {
-    max-width: 58rem;
+    min-width: 0;
+    width: 100%;
+    max-width: 42rem;
+    padding: clamp(1.1rem, 3vw, 2rem);
+    border: 1px solid rgb(255 255 255 / 58%);
+    border-radius: var(--soft-radius);
+    background: rgb(255 255 255 / 38%);
+    box-shadow:
+      inset 0 1px rgb(255 255 255 / 70%),
+      0 24px 80px rgb(68 47 35 / 12%);
+    backdrop-filter: blur(26px) saturate(1.15);
   }
 
   .hero-copy p:not(.eyebrow) {
@@ -192,6 +216,7 @@
     margin-block-start: 1.2rem;
     color: var(--muted);
     font-size: 1.12rem;
+    overflow-wrap: break-word;
   }
 
   .hero-stats {
@@ -272,41 +297,21 @@
     width: 100%;
   }
 
-  .hero-media {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgb(255 255 255 / 64%);
-    border-radius: var(--soft-radius);
-    box-shadow: 0 28px 80px rgb(61 41 36 / 18%);
-    aspect-ratio: 4 / 3;
-    padding: .55rem;
-    background: rgb(255 255 255 / 54%);
-    backdrop-filter: blur(18px);
-  }
-
-  .hero-main-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: calc(var(--soft-radius) - .65rem);
-    animation: gentle-zoom 9s ease-in-out infinite alternate;
-  }
-
   .floating-note {
-    position: absolute;
-    inset-inline: 1rem;
-    inset-block-end: 1.25rem;
-    max-width: calc(100% - 2rem);
+    justify-self: end;
+    align-self: end;
+    max-width: 24rem;
     display: flex;
     gap: .5rem;
     align-items: center;
-    padding: .8rem;
+    padding: .85rem 1rem;
     border: 1px solid rgb(255 255 255 / 70%);
     border-radius: 999px;
-    background: rgb(255 248 239 / 88%);
+    background: rgb(255 248 239 / 62%);
     color: var(--cocoa);
     font-weight: 800;
-    backdrop-filter: blur(16px);
+    box-shadow: 0 18px 50px rgb(68 47 35 / 12%);
+    backdrop-filter: blur(24px) saturate(1.15);
   }
 
   .ticker {
@@ -983,9 +988,15 @@
   .admin-topbar {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
     margin-block-end: 1rem;
+  }
+
+  .admin-topbar > a,
+  .admin-topbar > button {
+    flex: 0 0 auto;
   }
 
   .editor-layout {
@@ -1062,29 +1073,41 @@
     place-items: center;
   }
 
-  .image-picker {
+  .image-preview {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
-    gap: .5rem;
-  }
-
-  .image-picker button {
-    overflow: hidden;
-    padding: 0;
-    border: 3px solid transparent;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: .75rem;
+    align-items: center;
+    padding: .65rem;
+    border: 1px solid var(--line);
     border-radius: 1rem;
-    background: transparent;
-    cursor: pointer;
+    background: white;
   }
 
-  .image-picker button.active {
-    border-color: var(--berry);
-  }
-
-  .image-picker img {
+  .image-preview img {
     width: 100%;
+    max-height: 7rem;
     aspect-ratio: 1;
     object-fit: cover;
+    border-radius: .75rem;
+  }
+
+  .image-preview span {
+    color: var(--muted);
+    font-size: .82rem;
+    overflow-wrap: anywhere;
+  }
+
+  .requests-card p {
+    color: var(--muted);
+  }
+
+  .requests-frame {
+    width: 100%;
+    min-height: 32rem;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background: white;
   }
 
   .switch {
@@ -1100,16 +1123,12 @@
     accent-color: var(--berry);
   }
 
-  .publish-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
-
   .upload-button {
+    position: relative;
     justify-content: center;
     gap: .55rem;
     padding: .85rem 1.05rem;
+    overflow: hidden;
   }
 
   .upload-button input {
@@ -1203,7 +1222,6 @@
     .category-card,
     .product-card,
     .benefit,
-    .hero-media img,
     .product-rail > .product-card {
       animation: none;
     }
@@ -1240,19 +1258,22 @@
     .about,
     .work-with-us,
     .contact-section,
-    .editor-layout,
-    .publish-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .hero {
+    .editor-layout {
       padding-block-start: 2rem;
+      grid-template-columns: 1fr;
+      min-height: auto;
     }
 
     .ticker {
-      justify-content: flex-start;
-      flex-wrap: nowrap;
-      overflow-x: auto;
+      gap: .25rem .8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      overflow-x: visible;
+    }
+
+    .ticker span {
+      padding-inline: 0;
+      font-size: .92rem;
     }
 
     .admin-shell {
@@ -1275,7 +1296,58 @@
 
   @media (max-width: 620px) {
     h1 {
-      font-size: 3rem;
+      font-size: 1.9rem;
+      line-height: 1.08;
+      text-wrap: wrap;
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      line-height: 1.08;
+      text-wrap: wrap;
+    }
+
+    .hero {
+      width: calc(100% - 1rem);
+      padding: .75rem;
+      border-radius: 1.5rem;
+    }
+
+    .hero-copy {
+      width: min(100%, calc(100vw - 2.5rem));
+      max-inline-size: calc(100vw - 2.5rem);
+      padding: 1rem;
+      border-radius: 1.35rem;
+      overflow: hidden;
+    }
+
+    .hero *,
+    .about * {
+      min-width: 0;
+    }
+
+    .hero-copy h1 {
+      max-width: 16ch;
+    }
+
+    .about > div:first-child,
+    .about-card {
+      width: min(100%, calc(100vw - 2rem));
+      max-inline-size: calc(100vw - 2rem);
+    }
+
+    .about h2 {
+      max-width: 14ch;
+      margin-inline: auto;
+    }
+
+    .hero-copy p:not(.eyebrow) {
+      max-width: 31ch;
+      font-size: .95rem;
+    }
+
+    .about-card p {
+      max-width: 31ch;
     }
 
     .category-grid,
@@ -1288,20 +1360,13 @@
       grid-template-columns: 1fr;
     }
 
-    .hero-media {
-      margin-inline: 0;
-    }
-
-    .hero-main-photo {
-      aspect-ratio: 4 / 3;
-      height: auto;
-    }
-
     .floating-note {
-      position: static;
       max-width: none;
       margin-block-start: .75rem;
       border-color: var(--line);
+      justify-self: stretch;
+      border-radius: 1.25rem;
+      font-size: .9rem;
     }
 
     .site-header {
@@ -1315,7 +1380,9 @@
 
     .footer {
       grid-template-columns: 1fr;
-      padding: 1.25rem;
+      gap: .95rem;
+      padding: 1rem;
+      border-radius: 1.5rem;
     }
 
     .footer-main,
@@ -1325,6 +1392,77 @@
 
     .footer-bottom {
       justify-content: flex-start;
+    }
+
+    .footer-brand strong {
+      font-size: 1.25rem;
+    }
+
+    .footer-brand span:not(.brand-mark),
+    .footer-main p,
+    .footer-column span,
+    .footer-bottom,
+    .footer-column a {
+      font-size: .84rem;
+    }
+
+    .footer-column {
+      gap: .3rem;
+    }
+
+    .contact-section {
+      padding: 1rem;
+      border-radius: 1.5rem;
+    }
+
+    .contact-form {
+      gap: .75rem;
+      padding: 1rem;
+      border-radius: 1.25rem;
+    }
+
+    .contact-section::before {
+      content: none;
+    }
+
+    .admin-panel {
+      padding: .75rem;
+    }
+
+    .admin-sidebar {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: .75rem;
+    }
+
+    .admin-brand {
+      grid-column: 1 / -1;
+      margin-block-end: .25rem;
+    }
+
+    .admin-tab {
+      min-height: 42px;
+      padding: .65rem;
+      font-size: .88rem;
+    }
+
+    .admin-topbar > a,
+    .admin-topbar > button {
+      width: 100%;
+    }
+
+    .image-preview {
+      grid-template-columns: 1fr;
+    }
+
+    .requests-frame {
+      min-height: 24rem;
+    }
+
+    input,
+    textarea,
+    select {
+      min-height: 44px;
+      padding: .68rem .78rem;
     }
   }
 }

@@ -12,16 +12,16 @@ npm run dev
 Open:
 
 - Site: `http://localhost:5173/`
-- Admin: `http://localhost:5173/#/admin`
-- Consent page: `http://localhost:5173/#/privacy`
+- Admin: `http://localhost:5173/admin`
+- Consent page: `http://localhost:5173/privacy`
 
 Admin password: `gally062026`
 
 ## Admin workflow
 
-The admin panel lets you edit products, categories and business contact details without touching HTML. Changes are saved in the browser immediately. Use the Publish tab to download `catalog.json` or save `data/catalog.json` to GitHub through the GitHub Contents API.
+The admin panel lets the bakery owner edit products, categories, photos, and business contact details without touching code. Changes are kept in the browser while editing. Click **Save changes** in the admin panel to publish updates through the Vercel API using the GitHub token stored in Vercel environment variables.
 
-For GitHub save, create a fine-grained token with Contents read/write access to `SupremeGoogle/gally_bakery`, paste it in the admin panel, then click "Save catalog to GitHub".
+Product and category photos can be uploaded from the device or added by image URL. Customer requests are available in the **Requests** tab.
 
 ## Google Sheets form
 
@@ -31,7 +31,7 @@ For GitHub save, create a fine-grained token with Contents read/write access to 
 4. Deploy as Web App.
 5. Set access to "Anyone".
 6. Copy the Web App URL.
-7. Paste the URL in Admin -> Business -> Google Apps Script Web App URL.
+7. Set the URL as `VITE_APPS_SCRIPT_URL` in Vercel.
 
 Requests will be appended to a sheet named `Requests`.
 

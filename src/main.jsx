@@ -4,11 +4,8 @@ import {
   CakeSlice,
   Check,
   ChevronRight,
-  Download,
   Edit3,
   Eye,
-  FileText,
-  Github,
   Instagram,
   Lock,
   Mail,
@@ -27,8 +24,8 @@ import catalogSeed from '../data/catalog.json';
 import './styles.css';
 
 const STORAGE_KEY = 'gally_bakery_catalog_v1';
-const SETTINGS_KEY = 'gally_bakery_admin_settings_v1';
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || 'gally062026';
+const REQUESTS_SHEET_URL = 'https://docs.google.com/spreadsheets/d/1OCYrc2V3IM1HqL3jadGNBk65GcPZclYKNXPMkWpHMyI/edit?gid=0#gid=0';
 const DEFAULT_APPS_SCRIPT_URL =
   import.meta.env.VITE_APPS_SCRIPT_URL ||
   'https://script.google.com/macros/s/AKfycbwWFpv1tk_aRmyad2Lahv30yX_3KDeNzc0fI1gHHlD59Mk7pmYF7c5tSGy8SH_h04lc/exec';
@@ -45,24 +42,11 @@ const emptyProduct = {
   featured: false,
 };
 
-const imageOptions = [
-  '/assets/pdf-page01-01.webp',
-  '/assets/pdf-page02-01.webp',
-  '/assets/pdf-page02-02.webp',
-  '/assets/pdf-page02-03.webp',
-  '/assets/pdf-page02-04.webp',
-  '/assets/pdf-page03-01.webp',
-  '/assets/pdf-page04-01.webp',
-  '/assets/pdf-page04-02.webp',
-  '/assets/pdf-page04-03.webp',
-  '/assets/pdf-page04-04.webp',
-  '/assets/pdf-page05-01.webp',
-  '/assets/pdf-page06-01.webp',
-  '/assets/pdf-page07-01.webp',
-  '/assets/pdf-page07-02.webp',
-];
-
-const asset = (path) => `${import.meta.env.BASE_URL}${String(path || '').replace(/^\/+/, '')}`;
+const asset = (path) => {
+  const value = String(path || '');
+  if (value.startsWith('http') || value.startsWith('data:')) return value;
+  return `${import.meta.env.BASE_URL}${value.replace(/^\/+/, '')}`;
+};
 
 function slugify(value) {
   return value
@@ -82,21 +66,6 @@ function readCatalog() {
 
 function saveCatalog(catalog) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(catalog));
-}
-
-function readSettings() {
-  try {
-    return {
-      owner: 'SupremeGoogle',
-      repo: 'gally_bakery',
-      branch: 'main',
-      token: '',
-      appsScriptUrl: DEFAULT_APPS_SCRIPT_URL,
-      ...(JSON.parse(localStorage.getItem(SETTINGS_KEY)) || {}),
-    };
-  } catch {
-    return { owner: 'SupremeGoogle', repo: 'gally_bakery', branch: 'main', token: '', appsScriptUrl: DEFAULT_APPS_SCRIPT_URL };
-  }
 }
 
 function App() {
@@ -130,10 +99,9 @@ function App() {
 function HomePage({ catalog, setCatalog }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const featured = catalog.products.filter((product) => product.featured);
-  const settings = readSettings();
   const business = {
     ...catalog.business,
-    appsScriptUrl: settings.appsScriptUrl || DEFAULT_APPS_SCRIPT_URL || catalog.business.appsScriptUrl,
+    appsScriptUrl: DEFAULT_APPS_SCRIPT_URL || catalog.business.appsScriptUrl,
   };
 
   return (
@@ -154,7 +122,7 @@ function HomePage({ catalog, setCatalog }) {
       </header>
 
       <main id="top">
-        <section className="hero">
+        <section className="hero" style={{ '--hero-bg': `url(${asset('/assets/pdf-page05-01.webp')})` }}>
           <div className="hero-copy reveal">
             <p className="eyebrow">Est. 2020 | Family Bakery</p>
             <h1>Handmade desserts for cafes, restaurants and sweet celebrations.</h1>
@@ -175,12 +143,9 @@ function HomePage({ catalog, setCatalog }) {
               </a>
             </div>
           </div>
-          <div className="hero-media reveal delay-1" aria-label="Gally Bakery dessert photo">
-            <img className="hero-main-photo" src={asset('/assets/pdf-page05-01.webp')} alt="Assorted eclairs from Gally Bakery" fetchPriority="high" />
-            <div className="floating-note">
-              <Sparkles size={18} />
-              Small-batch, freezer-friendly, menu-ready
-            </div>
+          <div className="floating-note reveal delay-1">
+            <Sparkles size={18} />
+            Small-batch, freezer-friendly, menu-ready
           </div>
         </section>
 
@@ -446,7 +411,6 @@ function AdminPage({ catalog, setCatalog }) {
   const [unlocked, setUnlocked] = useState(sessionStorage.getItem('gally_admin') === 'true');
   const [password, setPassword] = useState('');
   const [tab, setTab] = useState('products');
-  const [settings, setSettings] = useState(readSettings);
   const [selectedProductId, setSelectedProductId] = useState(catalog.products[0]?.id || '');
   const [selectedCategoryId, setSelectedCategoryId] = useState(catalog.categories[0]?.id || '');
   const [status, setStatus] = useState('');
@@ -459,10 +423,6 @@ function AdminPage({ catalog, setCatalog }) {
     () => catalog.categories.find((category) => category.id === selectedCategoryId) || catalog.categories[0],
     [catalog.categories, selectedCategoryId],
   );
-
-  useEffect(() => {
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
-  }, [settings]);
 
   function unlock(event) {
     event.preventDefault();
@@ -509,27 +469,9 @@ function AdminPage({ catalog, setCatalog }) {
     setSelectedCategoryId(nextCategories[0]?.id || '');
   }
 
-  function downloadCatalog() {
-    const blob = new Blob([JSON.stringify(catalog, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'catalog.json';
-    link.click();
-    URL.revokeObjectURL(url);
-  }
-
-  async function importCatalog(event) {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    const text = await file.text();
-    setCatalog(JSON.parse(text));
-    setStatus('Catalog imported.');
-  }
-
-  async function saveToGithub() {
+  async function saveChanges() {
+    setStatus('Saving changes...');
     try {
-      setStatus('Saving through Vercel API...');
       const serverResponse = await fetch('/api/update-catalog', {
         method: 'POST',
         headers: {
@@ -540,50 +482,12 @@ function AdminPage({ catalog, setCatalog }) {
       });
       const serverJson = await serverResponse.json();
       if (serverResponse.ok) {
-        setStatus(`Saved to GitHub through Vercel API. Commit: ${serverJson.commit?.slice(0, 7) || 'created'}`);
+        setStatus('Saved. The site will update automatically after deployment.');
         return;
       }
-      if (serverResponse.status !== 404 && serverResponse.status !== 500) {
-        throw new Error(serverJson.error || 'Server publishing failed');
-      }
+      throw new Error(serverJson.error || 'Save failed');
     } catch (error) {
-      if (!settings.token) {
-        setStatus(`Server publishing is unavailable: ${error.message}. Add Vercel env variables or use a local GitHub token.`);
-        return;
-      }
-    }
-
-    if (!settings.token) {
-      setStatus('Add a GitHub token first.');
-      return;
-    }
-    setStatus('Saving to GitHub...');
-    const path = 'data/catalog.json';
-    const base = `https://api.github.com/repos/${settings.owner}/${settings.repo}/contents/${path}`;
-    try {
-      const current = await fetch(`${base}?ref=${settings.branch}`, {
-        headers: { Authorization: `Bearer ${settings.token}`, Accept: 'application/vnd.github+json' },
-      });
-      const currentJson = current.ok ? await current.json() : {};
-      const content = btoa(unescape(encodeURIComponent(JSON.stringify(catalog, null, 2))));
-      const response = await fetch(base, {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${settings.token}`,
-          Accept: 'application/vnd.github+json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: `Update bakery catalog ${new Date().toISOString()}`,
-          content,
-          branch: settings.branch,
-          sha: currentJson.sha,
-        }),
-      });
-      if (!response.ok) throw new Error(await response.text());
-      setStatus('Saved to GitHub.');
-    } catch (error) {
-      setStatus(`GitHub save failed: ${error.message.slice(0, 180)}`);
+      setStatus(`Could not save: ${error.message.slice(0, 180)}`);
     }
   }
 
@@ -609,7 +513,7 @@ function AdminPage({ catalog, setCatalog }) {
         <button className={tab === 'products' ? 'admin-tab active' : 'admin-tab'} onClick={() => setTab('products')}><CakeSlice size={18} /> Products</button>
         <button className={tab === 'categories' ? 'admin-tab active' : 'admin-tab'} onClick={() => setTab('categories')}><PackagePlus size={18} /> Categories</button>
         <button className={tab === 'business' ? 'admin-tab active' : 'admin-tab'} onClick={() => setTab('business')}><Edit3 size={18} /> Business</button>
-        <button className={tab === 'publish' ? 'admin-tab active' : 'admin-tab'} onClick={() => setTab('publish')}><Github size={18} /> Publish</button>
+        <button className={tab === 'requests' ? 'admin-tab active' : 'admin-tab'} onClick={() => setTab('requests')}><Mail size={18} /> Requests</button>
       </aside>
       <section className="admin-panel">
         <div className="admin-topbar">
@@ -618,6 +522,7 @@ function AdminPage({ catalog, setCatalog }) {
             <h1>{tab[0].toUpperCase() + tab.slice(1)}</h1>
           </div>
           <a className="button ghost" href="#/" target="_blank" rel="noreferrer"><Eye size={18} /> View site</a>
+          <button className="button primary" onClick={saveChanges}><Check size={18} /> Save changes</button>
         </div>
 
         {tab === 'products' && (
@@ -631,7 +536,7 @@ function AdminPage({ catalog, setCatalog }) {
                 </button>
               ))}
             </div>
-            <ProductEditor product={selectedProduct} categories={catalog.categories} updateProduct={updateProduct} deleteProduct={deleteProduct} />
+            <ProductEditor product={selectedProduct} categories={catalog.categories} updateProduct={updateProduct} deleteProduct={deleteProduct} setStatus={setStatus} />
           </div>
         )}
 
@@ -646,34 +551,16 @@ function AdminPage({ catalog, setCatalog }) {
                 </button>
               ))}
             </div>
-            <CategoryEditor category={selectedCategory} updateCategory={updateCategory} deleteCategory={deleteCategory} />
+            <CategoryEditor category={selectedCategory} updateCategory={updateCategory} deleteCategory={deleteCategory} setStatus={setStatus} />
           </div>
         )}
 
         {tab === 'business' && (
-          <BusinessEditor catalog={catalog} setCatalog={setCatalog} settings={settings} setSettings={setSettings} />
+          <BusinessEditor catalog={catalog} setCatalog={setCatalog} />
         )}
 
-        {tab === 'publish' && (
-          <div className="publish-grid">
-            <div className="editor-card">
-              <h2>GitHub save</h2>
-              <TextInput label="Owner" value={settings.owner} onChange={(owner) => setSettings({ ...settings, owner })} />
-              <TextInput label="Repository" value={settings.repo} onChange={(repo) => setSettings({ ...settings, repo })} />
-              <TextInput label="Branch" value={settings.branch} onChange={(branch) => setSettings({ ...settings, branch })} />
-              <TextInput label="Fine-grained token" type="password" value={settings.token} onChange={(token) => setSettings({ ...settings, token })} />
-              <button className="button primary" onClick={saveToGithub}><Github size={18} /> Save catalog to GitHub</button>
-            </div>
-            <div className="editor-card">
-              <h2>Backup</h2>
-              <button className="button ghost" onClick={downloadCatalog}><Download size={18} /> Download JSON</button>
-              <label className="upload-button">
-                <Upload size={18} /> Import JSON
-                <input type="file" accept="application/json" onChange={importCatalog} />
-              </label>
-              <a className="button ghost" href={asset('/scripts/google-apps-script.js')} download><FileText size={18} /> Apps Script file</a>
-            </div>
-          </div>
+        {tab === 'requests' && (
+          <RequestsPanel />
         )}
 
         <p className="admin-status" aria-live="polite">{status}</p>
@@ -682,7 +569,7 @@ function AdminPage({ catalog, setCatalog }) {
   );
 }
 
-function ProductEditor({ product, categories, updateProduct, deleteProduct }) {
+function ProductEditor({ product, categories, updateProduct, deleteProduct, setStatus }) {
   return (
     <div className="editor-card">
       <div className="editor-actions">
@@ -690,7 +577,6 @@ function ProductEditor({ product, categories, updateProduct, deleteProduct }) {
         <button className="danger-button" onClick={deleteProduct}><Trash2 size={18} /> Delete</button>
       </div>
       <TextInput label="Name" value={product.name} onChange={(name) => updateProduct({ name, id: product.id.startsWith('new-') ? slugify(name) || product.id : product.id })} />
-      <TextInput label="Product ID" value={product.id} onChange={(id) => updateProduct({ id: slugify(id) })} />
       <label className="field">
         <span>Category</span>
         <select value={product.categoryId} onChange={(event) => updateProduct({ categoryId: event.target.value })}>
@@ -701,13 +587,13 @@ function ProductEditor({ product, categories, updateProduct, deleteProduct }) {
       <TextInput label="Price" value={product.price} onChange={(price) => updateProduct({ price })} />
       <TagEditor label="Flavors" values={product.flavors} onChange={(flavors) => updateProduct({ flavors })} />
       <TagEditor label="Formats" values={product.formats} onChange={(formats) => updateProduct({ formats })} />
-      <ImagePicker value={product.image} onChange={(image) => updateProduct({ image })} />
+      <ImageInput label="Product photo" value={product.image} onChange={(image) => updateProduct({ image })} setStatus={setStatus} />
       <label className="switch"><input type="checkbox" checked={product.featured} onChange={(event) => updateProduct({ featured: event.target.checked })} /> Featured on homepage</label>
     </div>
   );
 }
 
-function CategoryEditor({ category, updateCategory, deleteCategory }) {
+function CategoryEditor({ category, updateCategory, deleteCategory, setStatus }) {
   return (
     <div className="editor-card">
       <div className="editor-actions">
@@ -715,14 +601,13 @@ function CategoryEditor({ category, updateCategory, deleteCategory }) {
         <button className="danger-button" onClick={deleteCategory}><Trash2 size={18} /> Delete</button>
       </div>
       <TextInput label="Name" value={category.name} onChange={(name) => updateCategory({ name, id: category.id.startsWith('category-') ? slugify(name) || category.id : category.id })} />
-      <TextInput label="Category ID" value={category.id} onChange={(id) => updateCategory({ id: slugify(id) })} />
       <TextArea label="Short text" value={category.short} onChange={(short) => updateCategory({ short })} />
-      <ImagePicker value={category.image} onChange={(image) => updateCategory({ image })} />
+      <ImageInput label="Category photo" value={category.image} onChange={(image) => updateCategory({ image })} setStatus={setStatus} />
     </div>
   );
 }
 
-function BusinessEditor({ catalog, setCatalog, settings, setSettings }) {
+function BusinessEditor({ catalog, setCatalog }) {
   const business = catalog.business;
   const update = (patch) => setCatalog({ ...catalog, business: { ...business, ...patch } });
   return (
@@ -735,7 +620,23 @@ function BusinessEditor({ catalog, setCatalog, settings, setSettings }) {
       <TextInput label="Display phone" value={business.displayPhone} onChange={(displayPhone) => update({ displayPhone })} />
       <TextInput label="Service area" value={business.serviceArea} onChange={(serviceArea) => update({ serviceArea })} />
       <TextInput label="Delivery text" value={business.delivery} onChange={(delivery) => update({ delivery })} />
-      <TextInput label="Google Apps Script Web App URL" value={settings.appsScriptUrl} onChange={(appsScriptUrl) => setSettings({ ...settings, appsScriptUrl })} />
+    </div>
+  );
+}
+
+function RequestsPanel() {
+  return (
+    <div className="editor-card wide requests-card">
+      <div className="editor-actions">
+        <div>
+          <h2>Customer requests</h2>
+          <p>All form submissions are saved in Google Sheets.</p>
+        </div>
+        <a className="button primary" href={REQUESTS_SHEET_URL} target="_blank" rel="noreferrer">
+          Open table <ChevronRight size={18} />
+        </a>
+      </div>
+      <iframe className="requests-frame" title="Gally Bakery requests sheet" src={REQUESTS_SHEET_URL.replace('/edit?gid=0#gid=0', '/preview')} />
     </div>
   );
 }
@@ -783,16 +684,69 @@ function TagEditor({ label, values, onChange }) {
   );
 }
 
-function ImagePicker({ value, onChange }) {
+function ImageInput({ label, value, onChange, setStatus }) {
+  const [urlDraft, setUrlDraft] = useState('');
+
+  async function uploadFile(event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setStatus('Uploading image...');
+    try {
+      const dataUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error('Could not read image file'));
+        reader.readAsDataURL(file);
+      });
+
+      const response = await fetch('/api/upload-image', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${ADMIN_PASSWORD}`,
+        },
+        body: JSON.stringify({
+          filename: file.name,
+          mimeType: file.type,
+          data: dataUrl,
+        }),
+      });
+      const json = await response.json();
+      if (!response.ok) throw new Error(json.error || 'Upload failed');
+      onChange(json.path);
+      setStatus('Image uploaded. Click Save changes to publish it.');
+    } catch (error) {
+      setStatus(`Image upload failed: ${error.message.slice(0, 160)}`);
+    } finally {
+      event.target.value = '';
+    }
+  }
+
+  function applyUrl() {
+    const next = urlDraft.trim();
+    if (!next) return;
+    onChange(next);
+    setUrlDraft('');
+    setStatus('Image URL added. Click Save changes to publish it.');
+  }
+
   return (
     <div className="field">
-      <span>Image</span>
-      <div className="image-picker">
-        {imageOptions.map((src) => (
-          <button key={src} className={src === value ? 'active' : ''} type="button" onClick={() => onChange(src)}>
-            <img src={asset(src)} alt="" />
-          </button>
-        ))}
+      <span>{label}</span>
+      {value && (
+        <div className="image-preview">
+          <img src={value.startsWith('http') || value.startsWith('data:') ? value : asset(value)} alt="" />
+          <span>{value}</span>
+        </div>
+      )}
+      <label className="upload-button">
+        <Upload size={18} /> Upload from device
+        <input type="file" accept="image/png,image/jpeg,image/webp" onChange={uploadFile} />
+      </label>
+      <div className="inline-add">
+        <input value={urlDraft} onChange={(event) => setUrlDraft(event.target.value)} placeholder="Paste image URL" />
+        <button className="button ghost" type="button" onClick={applyUrl}>Use URL</button>
       </div>
     </div>
   );
