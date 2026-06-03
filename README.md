@@ -29,9 +29,9 @@ Product and category photos can be uploaded from the device or added by image UR
 2. Open Extensions -> Apps Script.
 3. Paste the code from `scripts/google-apps-script.js`.
 4. Deploy as Web App.
-5. Set access to "Anyone".
+5. Set "Execute as" to your account and access to "Anyone".
 6. Copy the Web App URL.
-7. Set the URL as `VITE_APPS_SCRIPT_URL` in Vercel.
+7. Set the URL as `APPS_SCRIPT_URL` and `VITE_APPS_SCRIPT_URL` in Vercel.
 
 Requests will be appended to a sheet named `Requests`.
 
@@ -45,6 +45,7 @@ Use these variables in Vercel Project Settings -> Environment Variables:
 
 ```bash
 VITE_APPS_SCRIPT_URL=https://script.google.com/macros/s/AKfycbwWFpv1tk_aRmyad2Lahv30yX_3KDeNzc0fI1gHHlD59Mk7pmYF7c5tSGy8SH_h04lc/exec
+APPS_SCRIPT_URL=https://script.google.com/macros/s/AKfycbwWFpv1tk_aRmyad2Lahv30yX_3KDeNzc0fI1gHHlD59Mk7pmYF7c5tSGy8SH_h04lc/exec
 ADMIN_PASSWORD=gally062026
 GITHUB_TOKEN=your_new_github_token
 GITHUB_OWNER=SupremeGoogle

@@ -1,4 +1,5 @@
 const SHEET_NAME = 'Requests';
+const SPREADSHEET_ID = '1OCYrc2V3IM1HqL3jadGNBk65GcPZclYKNXPMkWpHMyI';
 
 function doPost(e) {
   const sheet = getSheet_();
@@ -26,7 +27,7 @@ function doGet() {
 }
 
 function getSheet_() {
-  const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
   let sheet = spreadsheet.getSheetByName(SHEET_NAME);
   if (!sheet) {
     sheet = spreadsheet.insertSheet(SHEET_NAME);

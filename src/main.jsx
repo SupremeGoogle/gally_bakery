@@ -239,7 +239,7 @@ function HomePage({ catalog, setCatalog }) {
               <span><MapPin size={18} /> {business.serviceArea}</span>
             </div>
           </div>
-          <ContactForm business={business} catalog={catalog} setCatalog={setCatalog} />
+          <ContactForm catalog={catalog} setCatalog={setCatalog} />
         </section>
       </main>
 
@@ -302,7 +302,7 @@ function ProductCard({ product }) {
   );
 }
 
-function ContactForm({ business, catalog, setCatalog }) {
+function ContactForm({ catalog, setCatalog }) {
   const [status, setStatus] = useState('');
   const [accepted, setAccepted] = useState(false);
 
@@ -318,27 +318,21 @@ function ContactForm({ business, catalog, setCatalog }) {
     payload.createdAt = new Date().toISOString();
     payload.source = 'gally_bakery_site';
 
-    if (!business.appsScriptUrl) {
-      const mailto = `mailto:gallybakery@example.com?subject=Gally Bakery request&body=${encodeURIComponent(JSON.stringify(payload, null, 2))}`;
-      location.href = mailto;
-      setStatus('Google Apps Script URL is not connected yet. The request opened as an email draft.');
-      return;
-    }
-
     setStatus('Sending...');
     try {
-      await fetch(business.appsScriptUrl, {
+      const response = await fetch('/api/submit-request', {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
+      const json = await response.json();
+      if (!response.ok) throw new Error(json.error || 'Could not send request');
       form.reset();
       setAccepted(false);
       setCatalog({ ...catalog, updatedAt: new Date().toISOString().slice(0, 10) });
       setStatus('Thank you. Your request has been sent.');
-    } catch {
-      setStatus('Could not send the request. Please call or message us on Instagram.');
+    } catch (error) {
+      setStatus(`Could not send the request: ${error.message}`);
     }
   }
 
