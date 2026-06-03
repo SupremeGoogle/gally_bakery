@@ -85,6 +85,13 @@ function App() {
 
   useEffect(() => saveCatalog(catalog), [catalog]);
 
+  useEffect(() => {
+    const { seoTitle, name, seoDescription } = catalog.business;
+    document.title = seoTitle || name || 'Gally Family Bakery';
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && seoDescription) metaDesc.setAttribute('content', seoDescription);
+  }, [catalog.business]);
+
   if (route.startsWith('#/admin') || route === '/admin' || route.startsWith('/admin/')) {
     return <AdminPage catalog={catalog} setCatalog={setCatalog} />;
   }
@@ -122,7 +129,7 @@ function HomePage({ catalog, setCatalog }) {
       </header>
 
       <main id="top">
-        <section className="hero" style={{ '--hero-bg': `url(${asset('/assets/gally-hero-creative.webp')})` }}>
+        <section className="hero">
           <div className="hero-copy reveal">
             <p className="eyebrow">Est. 2020 | Family Bakery</p>
             <h1>Handmade desserts for cafes, restaurants and sweet celebrations.</h1>
@@ -143,9 +150,12 @@ function HomePage({ catalog, setCatalog }) {
               </a>
             </div>
           </div>
-          <div className="floating-note reveal delay-1">
-            <Sparkles size={18} />
-            Small-batch, freezer-friendly, menu-ready
+          <div className="hero-visual">
+            <img src={asset('/assets/gally-hero-creative.webp')} alt="Gally Family Bakery" />
+            <div className="floating-note reveal delay-1">
+              <Sparkles size={18} />
+              Small-batch, freezer-friendly, menu-ready
+            </div>
           </div>
         </section>
 
@@ -609,6 +619,8 @@ function BusinessEditor({ catalog, setCatalog }) {
       <h2>Business info</h2>
       <TextInput label="Name" value={business.name} onChange={(name) => update({ name })} />
       <TextInput label="Tagline" value={business.tagline} onChange={(tagline) => update({ tagline })} />
+      <TextInput label="SEO title (Google / Yandex, ~60 chars)" value={business.seoTitle} onChange={(seoTitle) => update({ seoTitle })} />
+      <TextArea label="SEO description (search snippet, ~155 chars)" value={business.seoDescription} onChange={(seoDescription) => update({ seoDescription })} />
       <TextInput label="Instagram" value={business.instagram} onChange={(instagram) => update({ instagram })} />
       <TextInput label="Phone for links" value={business.phone} onChange={(phone) => update({ phone })} />
       <TextInput label="Display phone" value={business.displayPhone} onChange={(displayPhone) => update({ displayPhone })} />
