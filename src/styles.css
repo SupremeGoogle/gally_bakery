@@ -1376,7 +1376,7 @@
     }
 
     h1 {
-      font-size: 1.9rem;
+      font-size: 1.58rem;
       line-height: 1.08;
       text-wrap: wrap;
     }
@@ -1389,7 +1389,7 @@
 
     .hero {
       width: calc(100% - 1rem);
-      padding: .75rem;
+      padding: .55rem;
       border-radius: 1.5rem;
     }
 
@@ -1406,12 +1406,17 @@
     }
 
     .hero-copy {
-      width: min(100%, calc(100vw - 2.5rem));
-      max-inline-size: calc(100vw - 2.5rem);
-      padding: 1rem;
-      border-radius: 1.35rem;
+      width: min(100%, calc(100vw - 2.1rem));
+      max-inline-size: calc(100vw - 2.1rem);
+      padding: .8rem;
+      border-radius: 1.15rem;
       background: rgb(255 248 239 / 48%);
       overflow: hidden;
+    }
+
+    .hero-copy .eyebrow {
+      margin-block-end: .5rem;
+      font-size: .66rem;
     }
 
     .hero *,
@@ -1420,7 +1425,7 @@
     }
 
     .hero-copy h1 {
-      max-width: 16ch;
+      max-width: 17ch;
     }
 
     .about > div:first-child,
@@ -1436,7 +1441,9 @@
 
     .hero-copy p:not(.eyebrow) {
       max-width: 31ch;
-      font-size: .95rem;
+      margin-block-start: .7rem;
+      font-size: .84rem;
+      line-height: 1.4;
     }
 
     .about-card p {
@@ -1451,15 +1458,47 @@
 
     .hero-stats {
       grid-template-columns: 1fr;
+      gap: .45rem;
+      margin-block-start: .9rem;
+    }
+
+    .hero-stats span {
+      min-height: 3.2rem;
+      padding: .48rem .65rem;
+      border-radius: .9rem;
+      font-size: .66rem;
+    }
+
+    .hero-stats strong {
+      font-size: 1.15rem;
+    }
+
+    .hero-actions {
+      gap: .55rem;
+      margin-block-start: 1rem;
+    }
+
+    .hero-actions .button {
+      min-height: 42px;
+      padding: .66rem .78rem;
+      font-size: .88rem;
     }
 
     .floating-note {
-      border-radius: 1.25rem;
-      font-size: .9rem;
+      max-width: calc(100vw - 2.1rem);
+      padding: .58rem .72rem;
+      border-radius: 1rem;
+      font-size: .78rem;
+    }
+
+    .floating-note svg {
+      width: 16px;
+      height: 16px;
     }
 
     .site-header {
       padding-inline: 1rem;
+      min-height: 48px;
     }
 
     .footer,
