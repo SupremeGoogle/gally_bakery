@@ -64,6 +64,7 @@ Copy `.env.example` to `.env.local` for local development. The API routes only r
 | Variable | Used by |
 |---|---|
 | `VITE_APPS_SCRIPT_URL` | Frontend (contact form URL fallback) |
+| `VITE_ADMIN_PASSWORD` | Frontend admin password check (defaults to `gally062026`) |
 | `APPS_SCRIPT_URL` | `api/submit-request.js` |
 | `ADMIN_PASSWORD` | `api/update-catalog.js`, `api/upload-image.js` |
 | `GITHUB_TOKEN` | `api/update-catalog.js`, `api/upload-image.js` |

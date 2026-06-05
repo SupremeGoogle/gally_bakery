@@ -437,7 +437,7 @@ function InnerPageShell({ page, eyebrow, children }) {
         <img src={asset(page.image)} alt={`${page.title} by Gally Family Bakery`} fetchPriority="high" decoding="async" />
       </section>
       <section className="section inner-content">{children}</section>
-      <a className="floating-contact" href="#contact"><Mail size={18} /> Contact</a>
+      <a className="floating-contact" href="#contact" aria-label="Contact"><Mail size={18} /> <span>Contact</span></a>
     </main>
   );
 }
