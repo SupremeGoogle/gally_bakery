@@ -1780,12 +1780,32 @@
     align-items: start;
   }
 
-  .requests-frame {
-    width: 100%;
-    min-height: 65vh;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
-    background: white;
+  .requests-placeholder {
+    display: grid;
+    justify-items: center;
+    gap: .85rem;
+    padding: clamp(2.5rem, 6vw, 4.5rem) 1.5rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius);
+    text-align: center;
+    color: var(--muted);
+  }
+
+  .requests-placeholder svg {
+    color: var(--orange);
+  }
+
+  .requests-placeholder h3 {
+    color: var(--ink);
+    font-size: 1.4rem;
+  }
+
+  .requests-placeholder p {
+    max-width: 44ch;
+  }
+
+  .requests-placeholder .button {
+    margin-block-start: .5rem;
   }
 
   .mobile-only {

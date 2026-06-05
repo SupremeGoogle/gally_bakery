@@ -1032,7 +1032,12 @@ function RequestsPanel() {
         </div>
         <a className="button primary" href={REQUESTS_SHEET_URL} target="_blank" rel="noreferrer">Open table <ChevronRight size={18} /></a>
       </div>
-      <iframe className="requests-frame" title="Gally Bakery requests sheet" src={REQUESTS_SHEET_URL.replace('/edit?gid=0#gid=0', '/preview')} />
+      <div className="requests-placeholder">
+        <MessageSquareQuote size={34} />
+        <h3>Requests open in Google Sheets</h3>
+        <p>For privacy, submissions are not shown here. Open the table to view and manage all customer requests.</p>
+        <a className="button primary" href={REQUESTS_SHEET_URL} target="_blank" rel="noreferrer">Open requests table <ChevronRight size={18} /></a>
+      </div>
     </div>
   );
 }
