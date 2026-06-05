@@ -266,32 +266,45 @@
   .hero-copy {
     position: relative;
     display: grid;
-    align-content: center;
-    gap: clamp(1.25rem, 3vw, 2rem);
-    padding: clamp(1.5rem, 5vw, 3.75rem);
+    align-items: end;
+    min-height: clamp(34rem, 82vh, 47rem);
+    padding: clamp(1.5rem, 5vw, 4rem);
     border: 1px solid var(--line-dark);
     border-radius: calc(var(--radius) + 6px);
-    background:
-      radial-gradient(70% 90% at 8% 4%, rgb(217 92 35 / 24%), transparent 58%),
-      radial-gradient(60% 80% at 96% 104%, rgb(179 51 31 / 26%), transparent 60%),
-      linear-gradient(180deg, var(--ink-2), var(--ink));
+    background: var(--ink);
     color: var(--cream);
     overflow: hidden;
   }
 
-  .hero-copy::before {
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: kenburns 24s ease-in-out infinite alternate;
+  }
+
+  .hero-copy::after {
     content: "";
     position: absolute;
-    inset: -35%;
-    z-index: 0;
-    background: radial-gradient(38% 38% at 50% 50%, rgb(217 92 35 / 16%), transparent 70%);
-    animation: glow-drift 16s ease-in-out infinite alternate;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(103deg, rgb(15 13 10 / 95%) 0%, rgb(15 13 10 / 82%) 40%, rgb(15 13 10 / 40%) 78%, rgb(15 13 10 / 16%) 100%),
+      radial-gradient(58% 80% at 5% 2%, rgb(217 92 35 / 26%), transparent 55%),
+      radial-gradient(55% 70% at 98% 102%, rgb(179 51 31 / 28%), transparent 60%);
     pointer-events: none;
   }
 
-  .hero-copy > * {
+  .hero-inner {
     position: relative;
-    z-index: 1;
+    z-index: 2;
+    display: grid;
+    align-content: end;
+    gap: clamp(1.1rem, 2.5vw, 1.75rem);
+    max-width: 52rem;
   }
 
   .hero-kicker {
@@ -329,16 +342,17 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1px;
     background: var(--line-dark);
-    border: 1px solid var(--line-dark);
+    border: 1px solid rgb(255 250 243 / 16%);
     border-radius: var(--radius);
     overflow: hidden;
+    backdrop-filter: blur(8px);
   }
 
   .hero-stats span {
     display: grid;
     gap: .15rem;
     padding: 1rem 1.1rem;
-    background: rgb(255 250 243 / 3%);
+    background: rgb(15 13 10 / 42%);
     color: var(--muted-light);
     font-size: .72rem;
     font-weight: 600;
@@ -379,33 +393,6 @@
     color: var(--cream);
   }
 
-  .hero-media {
-    position: relative;
-    aspect-ratio: 21 / 9;
-    overflow: hidden;
-    border: 1px solid var(--line-dark);
-    border-radius: calc(var(--radius) + 6px);
-    background: var(--ink);
-    box-shadow: var(--shadow);
-  }
-
-  .hero-media::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background:
-      radial-gradient(70% 60% at 82% 8%, rgb(217 92 35 / 22%), transparent 58%),
-      radial-gradient(60% 60% at 6% 96%, rgb(179 51 31 / 22%), transparent 60%),
-      linear-gradient(180deg, transparent 45%, rgb(20 17 13 / 40%));
-    pointer-events: none;
-  }
-
-  .hero-media img {
-    animation: kenburns 24s ease-in-out infinite alternate;
-  }
-
-  .hero-media img,
   .inner-hero img,
   .category-card img,
   .dessert-card img,
@@ -1838,6 +1825,10 @@
 
     h2 {
       font-size: clamp(1.7rem, 7.5vw, 2.3rem);
+    }
+
+    .hero-copy {
+      min-height: clamp(30rem, 78vh, 40rem);
     }
 
     .hero-copy h1 {

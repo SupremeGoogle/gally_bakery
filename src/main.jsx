@@ -232,6 +232,8 @@ function HomePage({ catalog, setCatalog }) {
     <main id="top">
       <section className="hero">
         <div className="hero-copy">
+          <img className="hero-bg" src={asset(home.heroImage)} alt={home.heroImageAlt || 'Gally Family Bakery'} fetchPriority="high" decoding="async" />
+          <div className="hero-inner">
           <p className="hero-kicker">Family bakery | Florida</p>
           <h1>
             <span>{home.heroTitleBefore}</span>
@@ -266,9 +268,7 @@ function HomePage({ catalog, setCatalog }) {
             <a href={`mailto:${business.email}`}><Mail size={16} /> {business.email}</a>
             <a href={`tel:${business.phone}`}><Phone size={16} /> {business.displayPhone}</a>
           </div>
-        </div>
-        <div className="hero-media">
-          <img src={asset(home.heroImage)} alt={home.heroImageAlt || 'Gally Family Bakery'} fetchPriority="high" decoding="async" />
+          </div>
         </div>
       </section>
 
