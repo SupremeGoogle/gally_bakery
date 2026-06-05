@@ -914,16 +914,15 @@
   }
 
   .dessert-grid {
-    columns: 4 15rem;
-    column-gap: 1.1rem;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.1rem;
   }
 
   .dessert-card {
     display: flex;
     flex-direction: column;
-    margin: 0 0 1.1rem;
     overflow: hidden;
-    break-inside: avoid;
     transition: transform .3s ease, box-shadow .3s ease;
   }
 
@@ -934,13 +933,17 @@
 
   .dessert-photo {
     position: relative;
+    aspect-ratio: 1;
     overflow: hidden;
+    background:
+      radial-gradient(120% 120% at 50% 0%, var(--ink-3), var(--ink));
   }
 
   .dessert-photo img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain;
     transition: transform .6s ease;
   }
 
@@ -1893,7 +1896,7 @@
     }
 
     .dessert-grid {
-      columns: 2 12rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .footer {
@@ -2036,8 +2039,8 @@
     }
 
     .dessert-grid {
-      columns: 2 8rem;
-      column-gap: .75rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .75rem;
     }
 
     .dessert-cta {
