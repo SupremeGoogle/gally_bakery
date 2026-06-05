@@ -21,22 +21,23 @@ Dev routes:
 
 ## Architecture
 
-This is a single-page React app (Vite + React 19) with Vercel serverless API routes. The entire frontend lives in one file: `src/main.jsx`.
+This is a hash-routed React app (Vite + React 19) with Vercel serverless API routes. The entire frontend lives in one file: `src/main.jsx`.
 
 **Frontend (`src/main.jsx`)**
 
-Routing is hash/pathname-based with no router library — `App` reads `location.hash` or `location.pathname` and renders one of three pages:
-- `HomePage` — public bakery site (hero, categories, featured products, contact form)
-- `AdminPage` — password-protected catalog editor
+Routing is hash/pathname-based with no router library — `App` reads `location.hash` or `location.pathname` and renders:
+- `HomePage` — public bakery homepage (hero, categories, reviews, working-with-us, contact form)
+- Category/detail pages — `#/cakes`, `#/macarons`, `#/desserts`, `#/portfolio`, `#/about`
+- `AdminPage` — password-protected content editor
 - `PrivacyPage` — static personal data consent page
 
-Catalog state is managed in `App` via `useState`, persisted to `localStorage` under key `gally_bakery_catalog_v1`, and seeded from `data/catalog.json` on first load. The `catalog` object has three top-level keys: `business` (contact/display info), `categories` (array), and `products` (array).
+Catalog state is managed in `App` via `useState`, persisted to `localStorage` under key `gally_bakery_catalog_v2`, and seeded from `data/catalog.json` on first load. The `catalog` object includes `business`, `home`, `pages`, `categories`, `products`, `portfolio`, and `reviews`.
 
 The `asset(path)` helper resolves relative asset paths using `import.meta.env.BASE_URL` so images work correctly whether served locally or from a subdirectory. Images from `http`/`data:` URLs are passed through unchanged.
 
 **Admin panel (`AdminPage`)**
 
-Four tabs: Products, Categories, Business info, Requests. Changes mutate catalog state in the browser. **Save changes** calls `POST /api/update-catalog`, which commits `data/catalog.json` directly to the GitHub repo via the GitHub Contents API — this triggers a Vercel redeploy. Image uploads (`POST /api/upload-image`) commit new files under `public/assets/uploads/` to GitHub.
+Tabs: Home, Pages, Products/Categories, Portfolio, Reviews, Business, Requests. Changes mutate catalog state in the browser. **Save changes** calls `POST /api/update-catalog`, which commits `data/catalog.json` directly to the GitHub repo via the GitHub Contents API — this triggers a Vercel redeploy. Image uploads (`POST /api/upload-image`) commit new files under `public/assets/uploads/` to GitHub.
 
 Admin auth uses a plaintext password stored in `ADMIN_PASSWORD` env var (or the hardcoded fallback). The password is sent as a `Bearer` token to the API routes. Session is kept in `sessionStorage`.
 

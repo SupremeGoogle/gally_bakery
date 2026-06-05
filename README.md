@@ -1,6 +1,6 @@
 # Gally Family Bakery
 
-One-page React site for Gally Family Bakery with animated sections, editable catalog, contact form, privacy consent page and an admin panel.
+React site for Gally Family Bakery with hash-routed category pages, editable content, portfolio, reviews, contact form, privacy consent page and an admin panel.
 
 ## Local development
 
@@ -12,6 +12,7 @@ npm run dev
 Open:
 
 - Site: `http://localhost:5173/`
+- Pages: `#/cakes`, `#/macarons`, `#/desserts`, `#/portfolio`, `#/about`
 - Admin: `http://localhost:5173/admin`
 - Consent page: `http://localhost:5173/privacy`
 
@@ -19,7 +20,7 @@ Admin password: `gally062026`
 
 ## Admin workflow
 
-The admin panel lets the bakery owner edit products, categories, photos, and business contact details without touching code. Changes are kept in the browser while editing. Click **Save changes** in the admin panel to publish updates through the Vercel API using the GitHub token stored in Vercel environment variables.
+The admin panel lets the bakery owner edit homepage content, pages, products, categories, portfolio photos, reviews, photos, and business contact details without touching code. Changes are kept in the browser while editing. Click **Save changes** in the admin panel to publish updates through the Vercel API using the GitHub token stored in Vercel environment variables.
 
 Product and category photos can be uploaded from the device or added by image URL. Customer requests are available in the **Requests** tab.
 

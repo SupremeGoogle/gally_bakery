@@ -1,132 +1,183 @@
 {
-  "updatedAt": "2026-06-03",
+  "updatedAt": "2026-06-05",
   "business": {
     "name": "Gally Family Bakery",
-    "tagline": "Family Bakery | Cake | JAX | Yulee",
-    "seoTitle": "Gally Family Bakery — Handmade Desserts in JAX, Yulee & St. Johns",
-    "seoDescription": "Gally Family Bakery creates handmade cakes, macarons, eclairs, cookies, cheesecakes and cafe-ready desserts in JAX, Yulee and St. Johns Town Center.",
+    "tagline": "Family Bakery | Cakes | Macarons | Desserts",
+    "seoTitle": "Gally Family Bakery — Cakes, Macarons and Desserts in Florida",
+    "seoDescription": "Gally Family Bakery creates custom cakes, wedding cakes, macarons and handmade desserts for celebrations in JAX, Yulee and St. Johns.",
     "instagram": "https://www.instagram.com/gally_bakery?igsh=MXZ0Mzc0MHA2dTZpMg%3D%3D",
+    "email": "gallybakery@gmail.com",
     "phone": "+19177244288",
-    "displayPhone": "917 724 4288",
+    "displayPhone": "(917) 724 4288",
     "serviceArea": "JAX, Yulee, St. Johns Town Center",
     "delivery": "Delivery and free pick up",
     "appsScriptUrl": "https://script.google.com/macros/s/AKfycbyb_ngktqiXqceXihrB2kOaSAsQvdBsys6yNNgCUtv9gfT1MNi3-sqbZWbdrblisVswcg/exec"
   },
+  "home": {
+    "heroTitleBefore": "Welcome to",
+    "heroAnimatedWord": "Gally",
+    "heroTitleAfter": "Family Bakery",
+    "heroImage": "/assets/gally-hero-creative.webp",
+    "heroImageAlt": "Gally Family Bakery dessert table",
+    "stats": [
+      { "value": "2020", "label": "baking since" },
+      { "value": "FL", "label": "licensed" },
+      { "value": "15+", "label": "sweet options" }
+    ],
+    "aboutEyebrow": "Rooted in NY",
+    "aboutTitle": "Rooted in New York, now baking under the Florida sun.",
+    "aboutText": "A family bakery creating cakes, macarons and small desserts for celebrations, sweet tables and thoughtful gifts.",
+    "workingTitle": "Working with us is simple, warm and personal.",
+    "workingText": "Share the date, flavor direction and inspiration. We will help shape the sweetest part of the celebration."
+  },
   "categories": [
     {
-      "id": "cheesecakes",
-      "name": "Cheesecakes",
-      "short": "Full-size creamy cheesecakes designed for easy slicing and professional service.",
-      "image": "/assets/pdf-page03-01.webp"
-    },
-    {
-      "id": "grand-cookies",
-      "name": "Grand Cookies",
-      "short": "Rich oversized cookies with indulgent fillings, available baked or ready-to-bake.",
-      "image": "/assets/pdf-page04-01.webp"
-    },
-    {
-      "id": "eclairs",
-      "name": "Eclairs",
-      "short": "Light choux pastry with custard cream and polished cafe-ready presentation.",
-      "image": "/assets/pdf-page05-01.webp"
+      "id": "cakes",
+      "name": "Cakes",
+      "short": "Celebration cakes and wedding cakes made for meaningful moments.",
+      "image": "/assets/pdf-page07-01.webp",
+      "route": "#/cakes"
     },
     {
       "id": "macarons",
-      "name": "French Macarons",
-      "short": "Elegant almond shells with ganache, buttercream or American buttercream fillings.",
-      "image": "/assets/pdf-page06-01.webp"
+      "name": "Macarons",
+      "short": "Elegant French macarons in classic and seasonal flavors.",
+      "image": "/assets/pdf-page06-01.webp",
+      "route": "#/macarons"
     },
     {
-      "id": "exclusive",
-      "name": "Exclusive Cakes",
-      "short": "Signature layered desserts, including refined Honey Cake Medovik.",
-      "image": "/assets/pdf-page07-01.webp"
+      "id": "desserts",
+      "name": "Desserts",
+      "short": "Cupcakes, brownies, cheesecakes, cookies and more by request.",
+      "image": "/assets/pdf-page04-02.webp",
+      "route": "#/desserts"
     },
     {
-      "id": "extras",
-      "name": "Additional Desserts",
-      "short": "Flexible cafe-style treats for display cases, coffee bars and everyday service.",
-      "image": "/assets/pdf-page02-03.webp"
+      "id": "portfolio",
+      "name": "Portfolio",
+      "short": "A gallery of cakes, macarons and dessert tables.",
+      "image": "/assets/pdf-page01-02.webp",
+      "route": "#/portfolio"
+    },
+    {
+      "id": "about",
+      "name": "About Us",
+      "short": "Meet the family behind Gally Family Bakery.",
+      "image": "/assets/pdf-page01-01.webp",
+      "route": "#/about"
     }
   ],
+  "pages": {
+    "cakes": {
+      "title": "Cakes",
+      "intro": "Custom cakes for birthdays, weddings and family celebrations. Choose a direction, flavors and inspiration, then we will help shape the design.",
+      "image": "/assets/pdf-page07-01.webp",
+      "sections": [
+        {
+          "id": "celebration-cakes",
+          "title": "Celebration Cakes",
+          "description": "Layered cakes for birthdays, showers and everyday celebrations.",
+          "flavors": ["Vanilla", "Chocolate", "Red Velvet", "Honey Cake", "Lemon", "Strawberry"]
+        },
+        {
+          "id": "wedding-cakes",
+          "title": "Wedding Cakes",
+          "description": "Elegant cakes for intimate weddings and sweet reception tables.",
+          "flavors": ["Vanilla Bean", "Chocolate Ganache", "Pistachio Raspberry", "Lemon Berry", "Classic Honey"]
+        }
+      ]
+    },
+    "macarons": {
+      "title": "Macarons",
+      "intro": "Delicate almond shells with smooth fillings, made for gifts, dessert tables and celebrations.",
+      "image": "/assets/pdf-page06-01.webp",
+      "flavors": ["Vanilla", "Strawberry", "Pistachio", "Chocolate", "S'mores", "Lemon", "Raspberry"]
+    },
+    "desserts": {
+      "title": "Desserts",
+      "intro": "A rotating selection of small desserts is available by custom order.",
+      "image": "/assets/pdf-page04-01.webp",
+      "items": [
+        { "id": "cupcakes", "name": "Cupcakes", "image": "/assets/pdf-page02-03.webp" },
+        { "id": "brownies", "name": "Brownies", "image": "/assets/pdf-page04-02.webp" },
+        { "id": "cheesecakes", "name": "Cheesecakes", "image": "/assets/pdf-page03-01.webp" },
+        { "id": "cookies", "name": "Cookies", "image": "/assets/pdf-page04-04.webp" },
+        { "id": "eclairs", "name": "Eclairs", "image": "/assets/pdf-page05-01.webp" },
+        { "id": "dessert-bars", "name": "Dessert Bars", "image": "/assets/pdf-page02-02.webp" },
+        { "id": "key-lime-pie", "name": "Key Lime Pie", "image": "/assets/pdf-page02-04.webp" }
+      ]
+    },
+    "portfolio": {
+      "title": "Portfolio",
+      "intro": "A visual collection of cakes, macarons and desserts. Photos can be updated from the admin panel.",
+      "image": "/assets/pdf-page01-02.webp"
+    },
+    "about": {
+      "title": "About Us",
+      "intro": "Gally Family Bakery is a small family bakery rooted in New York energy and now baking under the Florida sun.",
+      "body": "We create cakes, macarons and desserts with a personal touch, focusing on warm communication, clean presentation and flavors that feel like celebration.",
+      "image": "/assets/pdf-page01-01.webp"
+    }
+  },
   "products": [
     {
-      "id": "classic-cheesecake",
-      "categoryId": "cheesecakes",
-      "name": "8-inch Cheesecakes",
-      "description": "Smooth, creamy full-size cheesecakes with balanced sweetness and a rich refined texture. Freezer-friendly for inventory planning.",
-      "flavors": ["Classic", "Key Lime", "Caramel", "Oreo", "Pistachio-Raspberry", "Strawberry"],
-      "formats": ["8-inch cake", "Approx. 4-4.5 inches tall", "Designed for flexible portioning"],
-      "price": "Standard $65 | 10+ $60",
-      "image": "/assets/pdf-page03-01.webp",
+      "id": "celebration-cakes",
+      "categoryId": "cakes",
+      "name": "Celebration Cakes",
+      "description": "Custom cakes for birthdays, showers and family celebrations.",
+      "flavors": ["Vanilla", "Chocolate", "Red Velvet", "Honey Cake", "Lemon", "Strawberry"],
+      "formats": ["Round cakes", "Custom decor", "Pickup or delivery by request"],
+      "price": "Custom quote",
+      "image": "/assets/pdf-page07-01.webp",
       "featured": true
     },
     {
-      "id": "grand-cookies",
-      "categoryId": "grand-cookies",
-      "name": "Grand Cookies",
-      "description": "Large structured cookies with soft rich interiors, made for display cases, grab-and-go sales or plated coffee service.",
-      "flavors": ["Banana Cream & Nutella", "Snickers", "Oreo", "Nutella & M&M's"],
-      "formats": ["Baked ready-to-serve", "Ready-to-bake frozen", "Unbaked stores frozen up to 2 months"],
-      "price": "Baked $4.50 | 20+ $4.00 | Ready-to-bake 20+ $3.50",
-      "image": "/assets/pdf-page04-04.webp",
-      "featured": true
-    },
-    {
-      "id": "eclairs",
-      "categoryId": "eclairs",
-      "name": "Eclairs",
-      "description": "Classic French eclairs with light choux pastry, smooth custard cream and clean modern finish.",
-      "flavors": ["Vanilla", "Chocolate", "Strawberry", "Pistachio"],
-      "formats": ["Display case ready", "Freezer-friendly up to 1 month"],
-      "price": "Standard $2.70 | 20+ $2.50",
-      "image": "/assets/pdf-page05-01.webp",
+      "id": "wedding-cakes",
+      "categoryId": "cakes",
+      "name": "Wedding Cakes",
+      "description": "Elegant wedding cakes for intimate celebrations and dessert tables.",
+      "flavors": ["Vanilla Bean", "Chocolate Ganache", "Pistachio Raspberry", "Lemon Berry", "Classic Honey"],
+      "formats": ["Consultation by request", "Custom design", "Delivery available"],
+      "price": "Custom quote",
+      "image": "/assets/pdf-page07-02.webp",
       "featured": true
     },
     {
       "id": "macarons",
       "categoryId": "macarons",
       "name": "French Macarons",
-      "description": "Refined almond flour shells with delicate fillings, ideal as standalone desserts, plated elements or assortments.",
-      "flavors": ["Vanilla", "Chocolate", "Pistachio", "Raspberry", "Salted Caramel", "Key Lime", "Seasonal colors"],
-      "formats": ["Ganache", "Buttercream", "American buttercream", "Freezes assembled up to 1 month"],
-      "price": "Ganache $2.50 | Buttercream $2.20 | American buttercream $2.00",
-      "image": "/assets/pdf-page02-01.webp",
+      "description": "Delicate almond shells with smooth fillings.",
+      "flavors": ["Vanilla", "Strawberry", "Pistachio", "Chocolate", "S'mores", "Lemon", "Raspberry"],
+      "formats": ["Gift boxes", "Dessert tables", "Custom colors"],
+      "price": "Custom quote",
+      "image": "/assets/pdf-page06-01.webp",
       "featured": true
+    }
+  ],
+  "portfolio": [
+    { "id": "portfolio-cake-1", "title": "Celebration Cake", "type": "Cakes", "image": "/assets/pdf-page07-01.webp" },
+    { "id": "portfolio-cake-2", "title": "Honey Cake", "type": "Cakes", "image": "/assets/pdf-page07-02.webp" },
+    { "id": "portfolio-macaron-1", "title": "Macaron Box", "type": "Macarons", "image": "/assets/pdf-page06-01.webp" },
+    { "id": "portfolio-dessert-1", "title": "Brownies", "type": "Desserts", "image": "/assets/pdf-page04-02.webp" },
+    { "id": "portfolio-dessert-2", "title": "Eclairs", "type": "Desserts", "image": "/assets/pdf-page05-01.webp" },
+    { "id": "portfolio-dessert-3", "title": "Key Lime Pie", "type": "Desserts", "image": "/assets/pdf-page02-04.webp" }
+  ],
+  "reviews": [
+    {
+      "id": "review-1",
+      "name": "Private client",
+      "text": "Beautiful cake, smooth communication and exactly the feeling we wanted for the celebration.",
+      "caption": "Custom cake order",
+      "rating": "5.0",
+      "image": "/assets/pdf-page07-01.webp"
     },
     {
-      "id": "honey-cake-medovik",
-      "categoryId": "exclusive",
-      "name": "Honey Cake Medovik",
-      "description": "Eastern European honey cake with thin honey layers and smooth sour cream based filling. Elegant, balanced and restaurant-ready.",
-      "flavors": ["Honey", "Sour cream based cream"],
-      "formats": ["Whole cake", "Can be pre-sliced into 6 or 8 portions", "Frozen storage up to 30 days"],
-      "price": "Whole cake $65",
-      "image": "/assets/pdf-page07-02.webp",
-      "featured": true
-    },
-    {
-      "id": "key-lime-pie",
-      "categoryId": "extras",
-      "name": "Key Lime Pie",
-      "description": "Fresh Florida-style pie with smooth citrus filling and buttery crust for display cases and relaxed dessert menus.",
-      "flavors": ["Key Lime"],
-      "formats": ["Whole pie", "Pre-sliced portions by request"],
-      "price": "Whole pie $30",
-      "image": "/assets/pdf-page02-04.webp",
-      "featured": false
-    },
-    {
-      "id": "brownies",
-      "categoryId": "extras",
-      "name": "Brownies",
-      "description": "Rich fudgy brownies with a soft dense texture and bold cafe-friendly flavors.",
-      "flavors": ["Oreo", "Peanut Butter", "Biscoff", "Nutella M&M's", "Gluten-free option"],
-      "formats": ["Grab-and-go", "Display case ready"],
-      "price": "$4.00 each | 20+ $3.75",
-      "image": "/assets/pdf-page04-02.webp",
-      "featured": false
+      "id": "review-2",
+      "name": "Family celebration",
+      "text": "The macarons were delicate, fresh and gone almost immediately.",
+      "caption": "Macaron box",
+      "rating": "5.0",
+      "image": "/assets/pdf-page06-01.webp"
     }
   ]
 }
