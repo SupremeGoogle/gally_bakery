@@ -167,7 +167,7 @@ function App() {
   if (route === 'privacy') return <PrivacyPage business={catalog.business} />;
 
   return (
-    <>
+    <div className="site">
       <SiteHeader />
       {route === 'cakes' && <CakesPage catalog={catalog} />}
       {route === 'macarons' && <MacaronsPage catalog={catalog} />}
@@ -176,7 +176,7 @@ function App() {
       {route === 'about' && <AboutPage catalog={catalog} />}
       {!['cakes', 'macarons', 'desserts', 'portfolio', 'about'].includes(route) && <HomePage catalog={catalog} setCatalog={setCatalog} />}
       <SiteFooter business={catalog.business} />
-    </>
+    </div>
   );
 }
 
