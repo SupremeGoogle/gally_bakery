@@ -31,7 +31,7 @@ Routing is hash/pathname-based with no router library — `App` reads `location.
 - `AdminPage` — password-protected content editor
 - `PrivacyPage` — static personal data consent page
 
-Catalog state is managed in `App` via `useState`, persisted to `localStorage` under key `gally_bakery_catalog_v2`, and seeded from `data/catalog.json` on first load. The `catalog` object includes `business`, `home`, `pages`, `categories`, `products`, `portfolio`, and `reviews`.
+Catalog state is managed in `App` via `useState`, persisted to `localStorage` under key `gally_bakery_catalog_v3`, and seeded from `data/catalog.json` on first load. The `catalog` object includes `business`, `home`, `pages`, `categories`, `products`, `portfolio`, and `reviews`.
 
 The `asset(path)` helper resolves relative asset paths using `import.meta.env.BASE_URL` so images work correctly whether served locally or from a subdirectory. Images from `http`/`data:` URLs are passed through unchanged.
 

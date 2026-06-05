@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   CakeSlice,
-  Check,
   ChevronRight,
   Edit3,
   Eye,
@@ -26,7 +25,7 @@ import {
 import catalogSeed from '../data/catalog.json';
 import './styles.css';
 
-const STORAGE_KEY = 'gally_bakery_catalog_v2';
+const STORAGE_KEY = 'gally_bakery_catalog_v3';
 const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || 'gally062026';
 const REQUESTS_SHEET_URL = 'https://docs.google.com/spreadsheets/d/1OCYrc2V3IM1HqL3jadGNBk65GcPZclYKNXPMkWpHMyI/edit?gid=0#gid=0';
 const DEFAULT_APPS_SCRIPT_URL =
@@ -215,6 +214,7 @@ function HomePage({ catalog, setCatalog }) {
     <main id="top">
       <section className="hero">
         <div className="hero-copy">
+          <p className="hero-kicker">Family bakery | Florida</p>
           <h1>
             <span>{home.heroTitleBefore}</span>
             <span className="hero-word">{home.heroAnimatedWord}</span>
@@ -232,13 +232,18 @@ function HomePage({ catalog, setCatalog }) {
             <a className="button primary" href="#contact">Order now <ChevronRight size={18} /></a>
             <a className="button ghost" href={business.instagram} target="_blank" rel="noreferrer">Instagram <Instagram size={18} /></a>
           </div>
+          <div className="hero-contact" aria-label="Contact details">
+            <a href={business.instagram} target="_blank" rel="noreferrer"><Instagram size={16} /> @gally_bakery</a>
+            <a href={`mailto:${business.email}`}><Mail size={16} /> {business.email}</a>
+            <a href={`tel:${business.phone}`}><Phone size={16} /> {business.displayPhone}</a>
+          </div>
         </div>
         <div className="hero-media">
           <img src={asset(home.heroImage)} alt={home.heroImageAlt || 'Gally Family Bakery'} fetchPriority="high" />
         </div>
       </section>
 
-      <section className="section about-teaser">
+      <section className="section about-teaser reveal-band">
         <div>
           <p className="eyebrow">{home.aboutEyebrow}</p>
           <h2>{home.aboutTitle}</h2>
@@ -252,14 +257,18 @@ function HomePage({ catalog, setCatalog }) {
       <section className="section" id="menu">
         <div className="section-heading">
           <p className="eyebrow">Signature Categories</p>
-          <h2>Choose the sweet direction.</h2>
+          <h2>Cakes, macarons and desserts without the noise.</h2>
         </div>
-        <div className="category-grid">
-          {categories.map((category) => (
+        <div className="category-list">
+          {categories.map((category, index) => (
             <a className="category-card" href={category.route || `#/${category.id}`} key={category.id}>
               <img src={asset(category.image)} alt={`${category.name} by Gally Bakery`} loading="lazy" />
-              <span>{category.name}</span>
-              <p>{category.short}</p>
+              <div>
+                <small>{String(index + 1).padStart(2, '0')}</small>
+                <span>{category.name}</span>
+                <p>{category.short}</p>
+              </div>
+              <ChevronRight size={22} />
             </a>
           ))}
         </div>
@@ -268,7 +277,7 @@ function HomePage({ catalog, setCatalog }) {
       <section className="section reviews-section">
         <div className="section-heading compact">
           <p className="eyebrow">Reviews</p>
-          <h2>Sweet words from recent orders.</h2>
+          <h2>Kind notes from recent orders.</h2>
         </div>
         <div className="review-grid">
           {reviews.map((review) => <ReviewCard key={review.id} review={review} />)}
@@ -282,9 +291,9 @@ function HomePage({ catalog, setCatalog }) {
           <p>{home.workingText}</p>
         </div>
         <div className="benefit-grid">
-          {['Custom cakes', 'Macarons', 'Dessert tables', 'Pickup or delivery'].map((label) => (
+          {['Custom cakes', 'Macarons', 'Dessert tables', 'Pickup or delivery'].map((label, index) => (
             <div className="benefit" key={label}>
-              <Check size={20} />
+              <span>{String(index + 1).padStart(2, '0')}</span>
               <span>{label}</span>
             </div>
           ))}
@@ -405,6 +414,7 @@ function InnerPageShell({ page, eyebrow, children }) {
           <p className="eyebrow">{eyebrow}</p>
           <h1>{page.title}</h1>
           <p>{page.intro}</p>
+          <a className="button primary" href="#contact">Start an order <ChevronRight size={18} /></a>
         </div>
         <img src={asset(page.image)} alt={`${page.title} by Gally Family Bakery`} />
       </section>
