@@ -20,9 +20,18 @@
     "heroImage": "/assets/gally-hero-creative.webp",
     "heroImageAlt": "Gally Family Bakery dessert table",
     "stats": [
-      { "value": "2020", "label": "baking since" },
-      { "value": "FL", "label": "licensed" },
-      { "value": "15+", "label": "sweet options" }
+      {
+        "value": "2020",
+        "label": "baking since"
+      },
+      {
+        "value": "FL",
+        "label": "licensed"
+      },
+      {
+        "value": "15+",
+        "label": "sweet options"
+      }
     ],
     "aboutEyebrow": "Rooted in NY",
     "aboutTitle": "Rooted in New York, now baking under the Florida sun.",
@@ -77,13 +86,26 @@
           "id": "celebration-cakes",
           "title": "Celebration Cakes",
           "description": "Layered cakes for birthdays, showers and everyday celebrations.",
-          "flavors": ["Vanilla", "Chocolate", "Red Velvet", "Honey Cake", "Lemon", "Strawberry"]
+          "flavors": [
+            "Vanilla",
+            "Chocolate",
+            "Red Velvet",
+            "Honey Cake",
+            "Lemon",
+            "Strawberry"
+          ]
         },
         {
           "id": "wedding-cakes",
           "title": "Wedding Cakes",
           "description": "Elegant cakes for intimate weddings and sweet reception tables.",
-          "flavors": ["Vanilla Bean", "Chocolate Ganache", "Pistachio Raspberry", "Lemon Berry", "Classic Honey"]
+          "flavors": [
+            "Vanilla Bean",
+            "Chocolate Ganache",
+            "Pistachio Raspberry",
+            "Lemon Berry",
+            "Classic Honey"
+          ]
         }
       ]
     },
@@ -91,20 +113,56 @@
       "title": "Macarons",
       "intro": "Delicate almond shells with smooth fillings, made for gifts, dessert tables and celebrations.",
       "image": "/assets/pdf-page06-01.webp",
-      "flavors": ["Vanilla", "Strawberry", "Pistachio", "Chocolate", "S'mores", "Lemon", "Raspberry"]
+      "flavors": [
+        "Vanilla",
+        "Strawberry",
+        "Pistachio",
+        "Chocolate",
+        "S'mores",
+        "Lemon",
+        "Raspberry"
+      ]
     },
     "desserts": {
       "title": "Desserts",
       "intro": "A rotating selection of small desserts is available by custom order.",
       "image": "/assets/pdf-page04-01.webp",
       "items": [
-        { "id": "cupcakes", "name": "Cupcakes", "image": "/assets/pdf-page02-03.webp" },
-        { "id": "brownies", "name": "Brownies", "image": "/assets/pdf-page04-02.webp" },
-        { "id": "cheesecakes", "name": "Cheesecakes", "image": "/assets/pdf-page03-01.webp" },
-        { "id": "cookies", "name": "Cookies", "image": "/assets/pdf-page04-04.webp" },
-        { "id": "eclairs", "name": "Eclairs", "image": "/assets/pdf-page05-01.webp" },
-        { "id": "dessert-bars", "name": "Dessert Bars", "image": "/assets/pdf-page02-02.webp" },
-        { "id": "key-lime-pie", "name": "Key Lime Pie", "image": "/assets/pdf-page02-04.webp" }
+        {
+          "id": "cupcakes",
+          "name": "Cupcakes",
+          "image": "/assets/pdf-page02-03.webp"
+        },
+        {
+          "id": "brownies",
+          "name": "Brownies",
+          "image": "/assets/pdf-page04-02.webp"
+        },
+        {
+          "id": "cheesecakes",
+          "name": "Cheesecakes",
+          "image": "/assets/pdf-page03-01.webp"
+        },
+        {
+          "id": "cookies",
+          "name": "Cookies",
+          "image": "/assets/pdf-page04-04.webp"
+        },
+        {
+          "id": "eclairs",
+          "name": "Eclairs",
+          "image": "/assets/pdf-page05-01.webp"
+        },
+        {
+          "id": "dessert-bars",
+          "name": "Dessert Bars",
+          "image": "/assets/pdf-page02-02.webp"
+        },
+        {
+          "id": "key-lime-pie",
+          "name": "Key Lime Pie",
+          "image": "/assets/pdf-page02-04.webp"
+        }
       ]
     },
     "portfolio": {
@@ -125,8 +183,19 @@
       "categoryId": "cakes",
       "name": "Celebration Cakes",
       "description": "Custom cakes for birthdays, showers and family celebrations.",
-      "flavors": ["Vanilla", "Chocolate", "Red Velvet", "Honey Cake", "Lemon", "Strawberry"],
-      "formats": ["Round cakes", "Custom decor", "Pickup or delivery by request"],
+      "flavors": [
+        "Vanilla",
+        "Chocolate",
+        "Red Velvet",
+        "Honey Cake",
+        "Lemon",
+        "Strawberry"
+      ],
+      "formats": [
+        "Round cakes",
+        "Custom decor",
+        "Pickup or delivery by request"
+      ],
       "price": "Custom quote",
       "image": "/assets/pdf-page07-01.webp",
       "featured": true
@@ -136,8 +205,18 @@
       "categoryId": "cakes",
       "name": "Wedding Cakes",
       "description": "Elegant wedding cakes for intimate celebrations and dessert tables.",
-      "flavors": ["Vanilla Bean", "Chocolate Ganache", "Pistachio Raspberry", "Lemon Berry", "Classic Honey"],
-      "formats": ["Consultation by request", "Custom design", "Delivery available"],
+      "flavors": [
+        "Vanilla Bean",
+        "Chocolate Ganache",
+        "Pistachio Raspberry",
+        "Lemon Berry",
+        "Classic Honey"
+      ],
+      "formats": [
+        "Consultation by request",
+        "Custom design",
+        "Delivery available"
+      ],
       "price": "Custom quote",
       "image": "/assets/pdf-page07-02.webp",
       "featured": true
@@ -147,20 +226,62 @@
       "categoryId": "macarons",
       "name": "French Macarons",
       "description": "Delicate almond shells with smooth fillings.",
-      "flavors": ["Vanilla", "Strawberry", "Pistachio", "Chocolate", "S'mores", "Lemon", "Raspberry"],
-      "formats": ["Gift boxes", "Dessert tables", "Custom colors"],
+      "flavors": [
+        "Vanilla",
+        "Strawberry",
+        "Pistachio",
+        "Chocolate",
+        "S'mores",
+        "Lemon",
+        "Raspberry"
+      ],
+      "formats": [
+        "Gift boxes",
+        "Dessert tables",
+        "Custom colors"
+      ],
       "price": "Custom quote",
       "image": "/assets/pdf-page06-01.webp",
       "featured": true
     }
   ],
   "portfolio": [
-    { "id": "portfolio-cake-1", "title": "Celebration Cake", "type": "Cakes", "image": "/assets/pdf-page07-01.webp" },
-    { "id": "portfolio-cake-2", "title": "Honey Cake", "type": "Cakes", "image": "/assets/pdf-page07-02.webp" },
-    { "id": "portfolio-macaron-1", "title": "Macaron Box", "type": "Macarons", "image": "/assets/pdf-page06-01.webp" },
-    { "id": "portfolio-dessert-1", "title": "Brownies", "type": "Desserts", "image": "/assets/pdf-page04-02.webp" },
-    { "id": "portfolio-dessert-2", "title": "Eclairs", "type": "Desserts", "image": "/assets/pdf-page05-01.webp" },
-    { "id": "portfolio-dessert-3", "title": "Key Lime Pie", "type": "Desserts", "image": "/assets/pdf-page02-04.webp" }
+    {
+      "id": "portfolio-cake-1",
+      "title": "Celebration Cake",
+      "type": "Cakes",
+      "image": "/assets/pdf-page07-01.webp"
+    },
+    {
+      "id": "portfolio-cake-2",
+      "title": "Honey Cake",
+      "type": "Cakes",
+      "image": "/assets/pdf-page07-02.webp"
+    },
+    {
+      "id": "portfolio-macaron-1",
+      "title": "Macaron Box",
+      "type": "Macarons",
+      "image": "/assets/pdf-page06-01.webp"
+    },
+    {
+      "id": "portfolio-dessert-1",
+      "title": "Brownies",
+      "type": "Desserts",
+      "image": "/assets/pdf-page04-02.webp"
+    },
+    {
+      "id": "portfolio-dessert-2",
+      "title": "Eclairs",
+      "type": "Desserts",
+      "image": "/assets/pdf-page05-01.webp"
+    },
+    {
+      "id": "portfolio-dessert-3",
+      "title": "Key Lime Pie",
+      "type": "Desserts",
+      "image": "/assets/pdf-page02-04.webp"
+    }
   ],
   "reviews": [
     {
@@ -168,16 +289,14 @@
       "name": "Private client",
       "text": "Beautiful cake, smooth communication and exactly the feeling we wanted for the celebration.",
       "caption": "Custom cake order",
-      "rating": "5.0",
-      "image": "/assets/pdf-page07-01.webp"
+      "rating": "5.0"
     },
     {
       "id": "review-2",
       "name": "Family celebration",
       "text": "The macarons were delicate, fresh and gone almost immediately.",
       "caption": "Macaron box",
-      "rating": "5.0",
-      "image": "/assets/pdf-page06-01.webp"
+      "rating": "5.0"
     }
   ]
 }

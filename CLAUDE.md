@@ -35,6 +35,8 @@ Catalog state is managed in `App` via `useState`, persisted to `localStorage` un
 
 The `asset(path)` helper resolves relative asset paths using `import.meta.env.BASE_URL` so images work correctly whether served locally or from a subdirectory. Images from `http`/`data:` URLs are passed through unchanged.
 
+All styling lives in one global stylesheet, `src/styles.css` (~1900 lines, plain CSS with no framework). The dark brand theme — black background, brand orange (`#ef5e1b`), red accents, animated hero — is defined here; restyling work happens in this file, not in inline styles.
+
 **Admin panel (`AdminPage`)**
 
 Tabs: Home, Pages, Products/Categories, Portfolio, Reviews, Business, Requests. Changes mutate catalog state in the browser. **Save changes** calls `POST /api/update-catalog`, which commits `data/catalog.json` directly to the GitHub repo via the GitHub Contents API — this triggers a Vercel redeploy. Image uploads (`POST /api/upload-image`) commit new files under `public/assets/uploads/` to GitHub.

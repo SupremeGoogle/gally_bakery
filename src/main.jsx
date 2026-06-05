@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   CakeSlice,
+  ChevronLeft,
   ChevronRight,
   Edit3,
   Eye,
@@ -82,7 +83,6 @@ const emptyReview = {
   text: 'Add review text here.',
   caption: 'Custom order',
   rating: '5.0',
-  image: '/assets/pdf-page07-01.webp',
 };
 
 const asset = (path) => {
@@ -377,16 +377,27 @@ function MacaronsPage({ catalog }) {
 
 function DessertsPage({ catalog }) {
   const page = catalog.pages.desserts;
+  const items = page.items || [];
   return (
     <InnerPageShell page={page} eyebrow="Desserts">
-      <div className="dessert-grid">
-        {(page.items || []).map((item) => (
-          <article className="dessert-card" key={item.id}>
-            <img src={asset(item.image)} alt={item.name} loading="lazy" decoding="async" />
-            <h2>{item.name}</h2>
-          </article>
-        ))}
-      </div>
+      {items.length === 0 ? (
+        <p className="gallery-empty">Dessert options are coming soon. Add them from the admin panel.</p>
+      ) : (
+        <div className="dessert-grid">
+          {items.map((item) => (
+            <a className="dessert-card" href="#contact" key={item.id}>
+              <div className="dessert-photo">
+                <img src={asset(item.image)} alt={item.name} loading="lazy" decoding="async" />
+                <span className="dessert-tag">To order</span>
+              </div>
+              <div className="dessert-body">
+                <h2>{item.name}</h2>
+                <span className="dessert-cta">Order <ChevronRight size={16} /></span>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
     </InnerPageShell>
   );
 }
@@ -394,28 +405,73 @@ function DessertsPage({ catalog }) {
 function PortfolioPage({ catalog }) {
   const page = catalog.pages.portfolio;
   const [filter, setFilter] = useState('All');
+  const [activeIndex, setActiveIndex] = useState(-1);
   const filters = ['All', ...Array.from(new Set(catalog.portfolio.map((item) => item.type).filter(Boolean)))];
   const items = filter === 'All' ? catalog.portfolio : catalog.portfolio.filter((item) => item.type === filter);
+  const active = activeIndex >= 0 ? items[activeIndex] : null;
+
+  const close = () => setActiveIndex(-1);
+  const step = (dir) => setActiveIndex((index) => (index + dir + items.length) % items.length);
+
+  useEffect(() => {
+    if (!active) return undefined;
+    const onKey = (event) => {
+      if (event.key === 'Escape') setActiveIndex(-1);
+      if (event.key === 'ArrowRight') setActiveIndex((index) => (index + 1) % items.length);
+      if (event.key === 'ArrowLeft') setActiveIndex((index) => (index - 1 + items.length) % items.length);
+    };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [active, items.length]);
+
   return (
     <InnerPageShell page={page} eyebrow="Portfolio">
       <div className="filter-row" aria-label="Portfolio filters">
         {filters.map((item) => (
-          <button className={item === filter ? 'filter-chip active' : 'filter-chip'} type="button" key={item} onClick={() => setFilter(item)}>
+          <button className={item === filter ? 'filter-chip active' : 'filter-chip'} type="button" key={item} onClick={() => { setFilter(item); setActiveIndex(-1); }}>
             {item}
           </button>
         ))}
       </div>
-      <div className="portfolio-grid">
-        {items.map((item) => (
-          <figure className="portfolio-item" key={item.id}>
-            <img src={asset(item.image)} alt={item.title} loading="lazy" decoding="async" />
+      {items.length === 0 ? (
+        <p className="gallery-empty">Photos are coming soon. Add your work from the admin panel.</p>
+      ) : (
+        <div className="gallery-grid">
+          {items.map((item, index) => (
+            <figure className="gallery-item" key={item.id}>
+              <button type="button" className="gallery-trigger" onClick={() => setActiveIndex(index)} aria-label={`Open ${item.title}`}>
+                <img src={asset(item.image)} alt={item.title} loading="lazy" decoding="async" />
+                <figcaption>
+                  <span>{item.type}</span>
+                  {item.title}
+                </figcaption>
+              </button>
+            </figure>
+          ))}
+        </div>
+      )}
+      {active && (
+        <div className="lightbox" role="dialog" aria-modal="true" aria-label={active.title} onClick={close}>
+          <button className="lightbox-close" type="button" onClick={close} aria-label="Close gallery"><X size={26} /></button>
+          {items.length > 1 && (
+            <button className="lightbox-nav prev" type="button" onClick={(event) => { event.stopPropagation(); step(-1); }} aria-label="Previous photo"><ChevronLeft size={32} /></button>
+          )}
+          <figure className="lightbox-figure" onClick={(event) => event.stopPropagation()}>
+            <img src={asset(active.image)} alt={active.title} />
             <figcaption>
-              <span>{item.type}</span>
-              {item.title}
+              <span>{active.type}</span>
+              {active.title}
             </figcaption>
           </figure>
-        ))}
-      </div>
+          {items.length > 1 && (
+            <button className="lightbox-nav next" type="button" onClick={(event) => { event.stopPropagation(); step(1); }} aria-label="Next photo"><ChevronRight size={32} /></button>
+          )}
+        </div>
+      )}
     </InnerPageShell>
   );
 }
@@ -464,13 +520,13 @@ function FlavorList({ flavors = [] }) {
 function ReviewCard({ review }) {
   return (
     <article className="review-card">
-      {review.image && <img src={asset(review.image)} alt="" loading="lazy" decoding="async" />}
-      <div>
-        <div className="stars" aria-label={`${review.rating || '5.0'} star review`}>
-          {Array.from({ length: 5 }).map((_, index) => <Star key={index} size={15} fill="currentColor" />)}
-          <span>{review.rating}</span>
-        </div>
-        <p>{review.text}</p>
+      <span className="quote-mark" aria-hidden="true">&ldquo;</span>
+      <div className="stars" aria-label={`${review.rating || '5.0'} star review`}>
+        {Array.from({ length: 5 }).map((_, index) => <Star key={index} size={15} fill="currentColor" />)}
+        <span>{review.rating}</span>
+      </div>
+      <p className="review-text">{review.text}</p>
+      <div className="review-author">
         <strong>{review.name}</strong>
         <span>{review.caption}</span>
       </div>
@@ -679,7 +735,7 @@ function AdminPage({ catalog, setCatalog }) {
         {tab === 'pages' && <PagesEditor catalog={catalog} setCatalog={setCatalog} setStatus={setStatus} />}
         {tab === 'catalog' && <CatalogEditor catalog={catalog} setCatalog={setCatalog} setStatus={setStatus} />}
         {tab === 'portfolio' && <PortfolioEditor catalog={catalog} setCatalog={setCatalog} setStatus={setStatus} />}
-        {tab === 'reviews' && <ReviewsEditor catalog={catalog} setCatalog={setCatalog} setStatus={setStatus} />}
+        {tab === 'reviews' && <ReviewsEditor catalog={catalog} setCatalog={setCatalog} />}
         {tab === 'business' && <BusinessEditor catalog={catalog} setCatalog={setCatalog} />}
         {tab === 'requests' && <RequestsPanel />}
 
@@ -856,7 +912,7 @@ function PortfolioEditor({ catalog, setCatalog, setStatus }) {
   )} />;
 }
 
-function ReviewsEditor({ catalog, setCatalog, setStatus }) {
+function ReviewsEditor({ catalog, setCatalog }) {
   const [selectedId, setSelectedId] = useState(catalog.reviews[0]?.id || '');
   const selected = catalog.reviews.find((item) => item.id === selectedId) || catalog.reviews[0] || emptyReview;
   const update = (patch) => setCatalog({ ...catalog, reviews: catalog.reviews.map((item) => (item.id === selected.id ? { ...item, ...patch } : item)) });
@@ -876,7 +932,6 @@ function ReviewsEditor({ catalog, setCatalog, setStatus }) {
       <TextArea label="Review text" value={selected.text} onChange={(text) => update({ text })} />
       <TextInput label="Caption" value={selected.caption} onChange={(caption) => update({ caption })} />
       <TextInput label="Rating" value={selected.rating} onChange={(rating) => update({ rating })} />
-      <ImageInput label="Review photo or screenshot" value={selected.image} onChange={(image) => update({ image })} setStatus={setStatus} />
     </>
   )} />;
 }
