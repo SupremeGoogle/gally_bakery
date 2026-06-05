@@ -43,9 +43,9 @@
     --line: #e2d7c7;
     --line-strong: #d3c4b0;
     --line-dark: rgb(255 250 243 / 12%);
-    --orange: #d95c23;
-    --orange-2: #b04a1c;
-    --orange-soft: rgb(217 92 35 / 12%);
+    --orange: #ef5e1b;
+    --orange-2: #c24812;
+    --orange-soft: rgb(239 94 27 / 14%);
     --red: #b3331f;
     --red-2: #8f2417;
     --accent: linear-gradient(115deg, var(--orange), var(--red));
@@ -293,7 +293,7 @@
     z-index: 1;
     background:
       linear-gradient(103deg, rgb(15 13 10 / 95%) 0%, rgb(15 13 10 / 82%) 40%, rgb(15 13 10 / 40%) 78%, rgb(15 13 10 / 16%) 100%),
-      radial-gradient(58% 80% at 5% 2%, rgb(217 92 35 / 26%), transparent 55%),
+      radial-gradient(58% 80% at 5% 2%, rgb(239 94 27 / 26%), transparent 55%),
       radial-gradient(55% 70% at 98% 102%, rgb(179 51 31 / 28%), transparent 60%);
     pointer-events: none;
   }
@@ -334,7 +334,7 @@
     white-space: pre;
     transform-origin: 50% 100%;
     animation: letter-rise .8s cubic-bezier(.2, .8, .25, 1.15) both;
-    text-shadow: 0 6px 30px rgb(217 92 35 / 35%);
+    text-shadow: 0 6px 30px rgb(239 94 27 / 35%);
   }
 
   .hero-stats {
@@ -427,13 +427,13 @@
   .button.primary {
     background: var(--accent);
     color: var(--cream);
-    box-shadow: 0 12px 30px rgb(217 92 35 / 24%);
+    box-shadow: 0 12px 30px rgb(239 94 27 / 24%);
   }
 
   .button.primary:hover {
     background: linear-gradient(115deg, var(--orange-2), var(--red-2));
     transform: translateY(-2px);
-    box-shadow: 0 18px 44px rgb(217 92 35 / 32%);
+    box-shadow: 0 18px 44px rgb(239 94 27 / 32%);
   }
 
   .button.ghost {
@@ -675,7 +675,7 @@
     padding: clamp(1.5rem, 4vw, 2.75rem);
     border-radius: calc(var(--radius) + 6px);
     background:
-      radial-gradient(120% 120% at 100% 0%, rgb(217 92 35 / 20%), transparent 50%),
+      radial-gradient(120% 120% at 100% 0%, rgb(239 94 27 / 20%), transparent 50%),
       var(--ink);
     color: var(--cream);
   }
@@ -823,7 +823,7 @@
     padding: clamp(1.5rem, 4vw, 3rem);
     border-radius: calc(var(--radius) + 6px);
     background:
-      radial-gradient(120% 120% at 0% 0%, rgb(217 92 35 / 16%), transparent 45%),
+      radial-gradient(120% 120% at 0% 0%, rgb(239 94 27 / 16%), transparent 45%),
       linear-gradient(180deg, var(--ink-2), var(--ink));
     color: var(--cream);
   }
@@ -1011,7 +1011,7 @@
     border-radius: 999px;
     background: var(--accent);
     color: var(--cream);
-    box-shadow: 0 16px 38px rgb(217 92 35 / 34%);
+    box-shadow: 0 16px 38px rgb(239 94 27 / 34%);
     font-size: .9rem;
     font-weight: 600;
     text-decoration: none;
@@ -1113,9 +1113,12 @@
   }
 
   .site h1,
-  .site h2,
   .site h3 {
     color: var(--cream);
+  }
+
+  .site h2 {
+    color: var(--orange);
   }
 
   .site .eyebrow {
@@ -1164,19 +1167,19 @@
   }
 
   .category-card:hover {
-    border-color: rgb(217 92 35 / 55%);
+    border-color: rgb(239 94 27 / 55%);
     box-shadow: 0 22px 52px rgb(0 0 0 / 42%);
   }
 
   .category-card span {
-    transition: color .3s ease;
-  }
-
-  .category-card:hover span {
     color: var(--orange);
   }
 
   .category-card small {
+    color: var(--orange);
+  }
+
+  .site .inner-hero h1 {
     color: var(--orange);
   }
 
@@ -1264,14 +1267,14 @@
   /* Richer dual-tone glows on the dark feature bands */
   .contact-section {
     background:
-      radial-gradient(72% 80% at 100% 0%, rgb(217 92 35 / 24%), transparent 56%),
+      radial-gradient(72% 80% at 100% 0%, rgb(239 94 27 / 24%), transparent 56%),
       radial-gradient(60% 70% at 0% 100%, rgb(179 51 31 / 22%), transparent 56%),
       var(--ink);
   }
 
   .reviews-section {
     background:
-      radial-gradient(50% 60% at 50% 0%, rgb(217 92 35 / 12%), transparent 60%),
+      radial-gradient(50% 60% at 50% 0%, rgb(239 94 27 / 12%), transparent 60%),
       var(--ink);
   }
 
