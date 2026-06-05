@@ -182,16 +182,34 @@ function App() {
 
 function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, [menuOpen]);
+
   return (
-    <header className="site-header">
+    <header className={menuOpen ? 'site-header menu-active' : 'site-header'}>
       <a className="brand" href="#/" aria-label="Gally Family Bakery home">
         <span className="brand-mark">G</span>
         <span>Gally Bakery</span>
       </a>
-      <button className="icon-button mobile-only" type="button" onClick={() => setMenuOpen((open) => !open)} aria-label="Open menu">
+      <button
+        className="icon-button mobile-only"
+        type="button"
+        onClick={() => setMenuOpen((open) => !open)}
+        aria-controls="site-nav"
+        aria-expanded={menuOpen}
+        aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+      >
         {menuOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
-      <nav className={menuOpen ? 'nav open' : 'nav'} aria-label="Main navigation" onClick={() => setMenuOpen(false)}>
+      <button className="nav-backdrop" type="button" aria-label="Close menu" onClick={() => setMenuOpen(false)} />
+      <nav id="site-nav" className={menuOpen ? 'nav open' : 'nav'} aria-label="Main navigation" onClick={() => setMenuOpen(false)}>
         {navItems.map(([label, href]) => (
           <a key={label} href={href}>{label}</a>
         ))}
@@ -239,7 +257,7 @@ function HomePage({ catalog, setCatalog }) {
           </div>
         </div>
         <div className="hero-media">
-          <img src={asset(home.heroImage)} alt={home.heroImageAlt || 'Gally Family Bakery'} fetchPriority="high" />
+          <img src={asset(home.heroImage)} alt={home.heroImageAlt || 'Gally Family Bakery'} fetchPriority="high" decoding="async" />
         </div>
       </section>
 
@@ -262,7 +280,7 @@ function HomePage({ catalog, setCatalog }) {
         <div className="category-list">
           {categories.map((category, index) => (
             <a className="category-card" href={category.route || `#/${category.id}`} key={category.id}>
-              <img src={asset(category.image)} alt={`${category.name} by Gally Bakery`} loading="lazy" />
+              <img src={asset(category.image)} alt={`${category.name} by Gally Bakery`} loading="lazy" decoding="async" />
               <div>
                 <small>{String(index + 1).padStart(2, '0')}</small>
                 <span>{category.name}</span>
@@ -353,7 +371,7 @@ function DessertsPage({ catalog }) {
       <div className="dessert-grid">
         {(page.items || []).map((item) => (
           <article className="dessert-card" key={item.id}>
-            <img src={asset(item.image)} alt={item.name} loading="lazy" />
+            <img src={asset(item.image)} alt={item.name} loading="lazy" decoding="async" />
             <h2>{item.name}</h2>
           </article>
         ))}
@@ -379,7 +397,7 @@ function PortfolioPage({ catalog }) {
       <div className="portfolio-grid">
         {items.map((item) => (
           <figure className="portfolio-item" key={item.id}>
-            <img src={asset(item.image)} alt={item.title} loading="lazy" />
+            <img src={asset(item.image)} alt={item.title} loading="lazy" decoding="async" />
             <figcaption>
               <span>{item.type}</span>
               {item.title}
@@ -396,7 +414,7 @@ function AboutPage({ catalog }) {
   return (
     <InnerPageShell page={page} eyebrow="About Us">
       <div className="about-story">
-        <img src={asset(page.image)} alt="Gally Family Bakery family placeholder" loading="lazy" />
+        <img src={asset(page.image)} alt="Gally Family Bakery family placeholder" loading="lazy" decoding="async" />
         <div className="detail-panel">
           <h2>Rooted in NY</h2>
           <p>{page.body}</p>
@@ -416,7 +434,7 @@ function InnerPageShell({ page, eyebrow, children }) {
           <p>{page.intro}</p>
           <a className="button primary" href="#contact">Start an order <ChevronRight size={18} /></a>
         </div>
-        <img src={asset(page.image)} alt={`${page.title} by Gally Family Bakery`} />
+        <img src={asset(page.image)} alt={`${page.title} by Gally Family Bakery`} fetchPriority="high" decoding="async" />
       </section>
       <section className="section inner-content">{children}</section>
       <a className="floating-contact" href="#contact"><Mail size={18} /> Contact</a>
@@ -435,7 +453,7 @@ function FlavorList({ flavors = [] }) {
 function ReviewCard({ review }) {
   return (
     <article className="review-card">
-      {review.image && <img src={asset(review.image)} alt="" loading="lazy" />}
+      {review.image && <img src={asset(review.image)} alt="" loading="lazy" decoding="async" />}
       <div>
         <div className="stars" aria-label={`${review.rating || '5.0'} star review`}>
           {Array.from({ length: 5 }).map((_, index) => <Star key={index} size={15} fill="currentColor" />)}

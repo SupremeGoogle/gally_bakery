@@ -66,6 +66,7 @@
       linear-gradient(180deg, var(--black) 0 34rem, var(--paper) 34rem),
       var(--paper);
     color: var(--black);
+    accent-color: var(--orange);
     line-height: 1.5;
   }
 
@@ -109,6 +110,12 @@
     color: var(--muted);
     text-wrap: pretty;
   }
+
+  @supports not (text-wrap: pretty) {
+    p {
+      text-wrap: wrap;
+    }
+  }
 }
 
 @layer layout {
@@ -136,6 +143,11 @@
     padding-block: clamp(4.5rem, 10vw, 8.5rem);
   }
 
+  .section:not(.reviews-section, .contact-section) {
+    content-visibility: auto;
+    contain-intrinsic-block-size: 42rem;
+  }
+
   .section-heading {
     display: grid;
     gap: .65rem;
@@ -151,7 +163,7 @@
 @layer components {
   .site-header {
     position: sticky;
-    z-index: 30;
+    z-index: 70;
     inset-block-start: .75rem;
     display: flex;
     min-height: 64px;
@@ -165,6 +177,10 @@
     background: rgb(18 16 13 / 88%);
     color: var(--cream);
     backdrop-filter: blur(22px);
+  }
+
+  .nav-backdrop {
+    display: none;
   }
 
   .brand,
@@ -335,6 +351,7 @@
   }
 
   .hero-media {
+    aspect-ratio: 16 / 9;
     min-height: clamp(22rem, 58vw, 42rem);
     overflow: hidden;
     border-radius: var(--radius);
@@ -442,6 +459,7 @@
 
   .category-card img {
     aspect-ratio: 1.35;
+    min-inline-size: 0;
     border-radius: var(--radius);
     filter: saturate(.92) contrast(1.02);
     transition: transform .55s ease, filter .55s ease;
@@ -511,6 +529,7 @@
   }
 
   .review-card > img {
+    aspect-ratio: 1;
     border-radius: var(--radius);
   }
 
@@ -709,6 +728,7 @@
   }
 
   .inner-hero img {
+    aspect-ratio: 1.25;
     min-height: 28rem;
     border-radius: var(--radius);
   }
@@ -846,6 +866,7 @@
   }
 
   .about-story img {
+    aspect-ratio: 1.2;
     min-height: 28rem;
     border-radius: var(--radius);
   }
@@ -1213,6 +1234,23 @@
   .mobile-only {
     display: none;
   }
+
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal-band,
+      .section-heading,
+      .category-card,
+      .review-card,
+      .benefit,
+      .dessert-card,
+      .portfolio-item,
+      .detail-panel {
+        animation: soft-enter both;
+        animation-timeline: view(block);
+        animation-range: entry 0% entry 42%;
+      }
+    }
+  }
 }
 
 @layer utilities {
@@ -1231,6 +1269,17 @@
       opacity: 1;
       transform: translateY(0) scale(1);
       filter: blur(0);
+    }
+  }
+
+  @keyframes soft-enter {
+    from {
+      opacity: 0;
+      transform: translateY(28px) scale(.985);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
   }
 
@@ -1294,23 +1343,69 @@
       display: grid;
     }
 
+    .nav-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: block;
+      border: 0;
+      background: rgb(18 16 13 / 0%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease, background .25s ease;
+    }
+
+    .menu-active .nav-backdrop {
+      background: rgb(18 16 13 / 52%);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     .nav {
-      position: absolute;
-      inset: calc(100% + .5rem) 0 auto;
-      display: none;
-      padding: .45rem;
-      border: 1px solid var(--line-dark);
-      border-radius: var(--radius);
-      background: var(--black);
-      box-shadow: var(--shadow);
+      position: fixed;
+      z-index: 60;
+      inset-block: 0;
+      inset-inline: auto 0;
+      display: grid;
+      align-content: start;
+      gap: .35rem;
+      width: min(23rem, 86dvw);
+      max-width: 100dvw;
+      height: 100svh;
+      padding: 5.75rem 1rem 1rem;
+      border: 0;
+      border-inline-start: 1px solid var(--line-dark);
+      border-radius: 0;
+      background: #17120f;
+      box-shadow: -24px 0 70px rgb(18 16 13 / 36%);
+      opacity: 0;
+      visibility: hidden;
+      clip-path: inset(0 0 0 100%);
+      pointer-events: none;
+      transition: clip-path .28s cubic-bezier(.2, .8, .2, 1), opacity .2s ease, visibility .2s ease;
+      overflow-y: auto;
+      overflow-x: clip;
     }
 
     .nav.open {
-      display: grid;
+      opacity: 1;
+      visibility: visible;
+      clip-path: inset(0);
+      pointer-events: auto;
     }
 
     .nav a {
       width: 100%;
+      min-height: 52px;
+      justify-content: space-between;
+      border-block-end: 1px solid var(--line-dark);
+      border-radius: 0;
+      font-size: 1rem;
+    }
+
+    .site-header .icon-button {
+      position: relative;
+      z-index: 80;
     }
 
     .review-grid {
@@ -1372,7 +1467,8 @@
     .hero-media,
     .inner-hero img,
     .about-story img {
-      min-height: 22rem;
+      aspect-ratio: 4 / 3;
+      min-height: 0;
     }
 
     .category-card {
