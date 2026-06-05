@@ -81,31 +81,18 @@
       "title": "Cakes",
       "intro": "Custom cakes for birthdays, weddings and family celebrations. Choose a direction, flavors and inspiration, then we will help shape the design.",
       "image": "/assets/pdf-page07-01.webp",
-      "sections": [
+      "items": [
         {
-          "id": "celebration-cakes",
-          "title": "Celebration Cakes",
-          "description": "Layered cakes for birthdays, showers and everyday celebrations.",
-          "flavors": [
-            "Vanilla",
-            "Chocolate",
-            "Red Velvet",
-            "Honey Cake",
-            "Lemon",
-            "Strawberry"
-          ]
+          "id": "cake-honey",
+          "name": "Honey Cake",
+          "description": "Delicate honey sponge layered with silky sour-cream filling.",
+          "image": "/assets/pdf-page07-02.webp"
         },
         {
-          "id": "wedding-cakes",
-          "title": "Wedding Cakes",
-          "description": "Elegant cakes for intimate weddings and sweet reception tables.",
-          "flavors": [
-            "Vanilla Bean",
-            "Chocolate Ganache",
-            "Pistachio Raspberry",
-            "Lemon Berry",
-            "Classic Honey"
-          ]
+          "id": "cake-celebration",
+          "name": "Celebration Cake",
+          "description": "Custom-decorated cake made for birthdays and special occasions.",
+          "image": "/assets/pdf-page07-01.webp"
         }
       ]
     },
@@ -113,14 +100,19 @@
       "title": "Macarons",
       "intro": "Delicate almond shells with smooth fillings, made for gifts, dessert tables and celebrations.",
       "image": "/assets/pdf-page06-01.webp",
-      "flavors": [
-        "Vanilla",
-        "Strawberry",
-        "Pistachio",
-        "Chocolate",
-        "S'mores",
-        "Lemon",
-        "Raspberry"
+      "items": [
+        {
+          "id": "macaron-classic",
+          "name": "Classic Macarons",
+          "description": "Crisp almond shells with a smooth ganache filling.",
+          "image": "/assets/pdf-page06-01.webp"
+        },
+        {
+          "id": "macaron-box",
+          "name": "Macaron Gift Box",
+          "description": "An assortment of flavors, boxed and ready for gifting.",
+          "image": "/assets/pdf-page06-01.webp"
+        }
       ]
     },
     "desserts": {

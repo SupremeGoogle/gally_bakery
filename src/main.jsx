@@ -346,19 +346,30 @@ function HomePage({ catalog, setCatalog }) {
   );
 }
 
+function ProductCatalog({ items, emptyText }) {
+  if (!items.length) return <p className="gallery-empty">{emptyText}</p>;
+  return (
+    <div className="catalog-grid">
+      {items.map((item) => (
+        <article className="catalog-card" key={item.id}>
+          <div className="catalog-photo">
+            <img src={asset(item.image)} alt={item.name} loading="lazy" decoding="async" />
+          </div>
+          <div className="catalog-body">
+            <h3>{item.name}</h3>
+            {item.description && <p>{item.description}</p>}
+          </div>
+        </article>
+      ))}
+    </div>
+  );
+}
+
 function CakesPage({ catalog }) {
   const page = catalog.pages.cakes;
   return (
     <InnerPageShell page={page} eyebrow="Custom Orders">
-      <div className="split-section">
-        {(page.sections || []).map((section) => (
-          <article className="detail-panel" key={section.id}>
-            <h2>{section.title}</h2>
-            <p>{section.description}</p>
-            <FlavorList flavors={section.flavors} />
-          </article>
-        ))}
-      </div>
+      <ProductCatalog items={page.items || []} emptyText="Cakes are coming soon. Add them from the admin panel." />
     </InnerPageShell>
   );
 }
@@ -367,10 +378,7 @@ function MacaronsPage({ catalog }) {
   const page = catalog.pages.macarons;
   return (
     <InnerPageShell page={page} eyebrow="Macarons">
-      <div className="detail-panel wide-panel">
-        <h2>Main flavors</h2>
-        <FlavorList flavors={page.flavors} />
-      </div>
+      <ProductCatalog items={page.items || []} emptyText="Macarons are coming soon. Add them from the admin panel." />
     </InnerPageShell>
   );
 }
@@ -506,14 +514,6 @@ function InnerPageShell({ page, eyebrow, children }) {
       <section className="section inner-content">{children}</section>
       <a className="floating-contact" href="#contact" aria-label="Contact"><Mail size={18} /> <span>Contact</span></a>
     </main>
-  );
-}
-
-function FlavorList({ flavors = [] }) {
-  return (
-    <div className="flavor-list">
-      {flavors.map((flavor) => <span key={flavor}>{flavor}</span>)}
-    </div>
   );
 }
 
@@ -786,8 +786,8 @@ function PagesEditor({ catalog, setCatalog, setStatus }) {
         <TextArea label="Intro" value={page.intro} onChange={(intro) => updatePage({ intro })} />
         {'body' in page && <TextArea label="Body" value={page.body} onChange={(body) => updatePage({ body })} />}
         <ImageInput label="Page photo" value={page.image} onChange={(image) => updatePage({ image })} setStatus={setStatus} />
-        {selected === 'cakes' && <CakeSectionsEditor sections={page.sections || []} onChange={(sections) => updatePage({ sections })} />}
-        {selected === 'macarons' && <TagEditor label="Flavors" values={page.flavors || []} onChange={(flavors) => updatePage({ flavors })} />}
+        {selected === 'cakes' && <CatalogItemsEditor noun="Cake" items={page.items || []} onChange={(items) => updatePage({ items })} setStatus={setStatus} />}
+        {selected === 'macarons' && <CatalogItemsEditor noun="Macaron" items={page.items || []} onChange={(items) => updatePage({ items })} setStatus={setStatus} />}
         {selected === 'desserts' && <DessertItemsEditor items={page.items || []} onChange={(items) => updatePage({ items })} setStatus={setStatus} />}
       </div>
     </div>
@@ -951,16 +951,19 @@ function ListEditor({ title, items, selected, setSelectedId, addItem, deleteItem
   );
 }
 
-function CakeSectionsEditor({ sections, onChange }) {
-  const update = (index, patch) => onChange(sections.map((section, itemIndex) => (itemIndex === index ? { ...section, ...patch } : section)));
+function CatalogItemsEditor({ items, onChange, setStatus, noun }) {
+  const update = (index, patch) => onChange(items.map((item, itemIndex) => (itemIndex === index ? { ...item, ...patch } : item)));
+  const add = () => onChange([{ id: `item-${Date.now()}`, name: `New ${noun.toLowerCase()}`, description: '', image: '/assets/pdf-page07-01.webp' }, ...items]);
+  const remove = (index) => onChange(items.filter((_, itemIndex) => itemIndex !== index));
   return (
     <div className="nested-editor">
-      <h3>Cake sections</h3>
-      {sections.map((section, index) => (
-        <div className="mini-card" key={section.id || index}>
-          <TextInput label="Title" value={section.title} onChange={(title) => update(index, { title })} />
-          <TextArea label="Description" value={section.description} onChange={(description) => update(index, { description })} />
-          <TagEditor label="Flavors" values={section.flavors || []} onChange={(flavors) => update(index, { flavors })} />
+      <div className="editor-actions"><h3>{noun} items</h3><button className="button ghost" onClick={add}><Plus size={18} /> Add {noun.toLowerCase()}</button></div>
+      {items.map((item, index) => (
+        <div className="mini-card" key={item.id || index}>
+          <EditorHeader title={item.name} onDelete={() => remove(index)} />
+          <TextInput label="Name" value={item.name} onChange={(name) => update(index, { name })} />
+          <TextArea label="Description" value={item.description} onChange={(description) => update(index, { description })} />
+          <ImageInput label="Photo" value={item.image} onChange={(image) => update(index, { image })} setStatus={setStatus} />
         </div>
       ))}
     </div>

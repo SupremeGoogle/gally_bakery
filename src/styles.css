@@ -996,6 +996,69 @@
     transform: translateX(0);
   }
 
+  /* ---------- Product catalog (cakes / macarons) ---------- */
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+    gap: 1.25rem;
+  }
+
+  .catalog-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--line-dark);
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, var(--ink-2), var(--ink));
+    box-shadow: 0 20px 50px rgb(0 0 0 / 30%);
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+
+  .catalog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 28px 60px rgb(0 0 0 / 45%);
+  }
+
+  .catalog-photo {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: radial-gradient(120% 120% at 50% 0%, var(--ink-3), var(--ink));
+  }
+
+  .catalog-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform .6s ease;
+  }
+
+  .catalog-card:hover .catalog-photo img {
+    transform: scale(1.05);
+  }
+
+  .catalog-body {
+    display: grid;
+    gap: .4rem;
+    padding: 1.1rem 1.2rem 1.35rem;
+  }
+
+  .catalog-body h3 {
+    color: var(--cream);
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  .catalog-body p {
+    color: rgb(255 250 243 / 72%);
+    font-size: .92rem;
+    line-height: 1.5;
+  }
+
   .filter-row {
     display: flex;
     flex-wrap: wrap;
@@ -1915,7 +1978,8 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .dessert-grid {
+    .dessert-grid,
+    .catalog-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
@@ -2058,7 +2122,8 @@
       grid-template-columns: 1fr;
     }
 
-    .dessert-grid {
+    .dessert-grid,
+    .catalog-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: .75rem;
     }
