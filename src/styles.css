@@ -46,7 +46,9 @@
     --orange: #d95c23;
     --orange-2: #b04a1c;
     --orange-soft: rgb(217 92 35 / 12%);
-    --red: #9f2534;
+    --red: #b3331f;
+    --red-2: #8f2417;
+    --accent: linear-gradient(115deg, var(--orange), var(--red));
     --shadow: 0 24px 60px rgb(20 17 13 / 12%);
     --shadow-sm: 0 10px 30px rgb(20 17 13 / 8%);
     --shell: 72rem;
@@ -270,9 +272,26 @@
     border: 1px solid var(--line-dark);
     border-radius: calc(var(--radius) + 6px);
     background:
-      radial-gradient(120% 120% at 0% 0%, rgb(217 92 35 / 18%), transparent 45%),
+      radial-gradient(70% 90% at 8% 4%, rgb(217 92 35 / 24%), transparent 58%),
+      radial-gradient(60% 80% at 96% 104%, rgb(179 51 31 / 26%), transparent 60%),
       linear-gradient(180deg, var(--ink-2), var(--ink));
     color: var(--cream);
+    overflow: hidden;
+  }
+
+  .hero-copy::before {
+    content: "";
+    position: absolute;
+    inset: -35%;
+    z-index: 0;
+    background: radial-gradient(38% 38% at 50% 50%, rgb(217 92 35 / 16%), transparent 70%);
+    animation: glow-drift 16s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  .hero-copy > * {
+    position: relative;
+    z-index: 1;
   }
 
   .hero-kicker {
@@ -291,11 +310,18 @@
   }
 
   .hero-word {
+    display: inline-flex;
     width: max-content;
     max-width: 100%;
     color: var(--orange);
-    transform-origin: left bottom;
-    animation: gally-rise 1.05s cubic-bezier(.17, .89, .32, 1.2) both;
+  }
+
+  .hero-letter {
+    display: inline-block;
+    white-space: pre;
+    transform-origin: 50% 100%;
+    animation: letter-rise .8s cubic-bezier(.2, .8, .25, 1.15) both;
+    text-shadow: 0 6px 30px rgb(217 92 35 / 35%);
   }
 
   .hero-stats {
@@ -354,11 +380,29 @@
   }
 
   .hero-media {
+    position: relative;
     aspect-ratio: 21 / 9;
     overflow: hidden;
+    border: 1px solid var(--line-dark);
     border-radius: calc(var(--radius) + 6px);
     background: var(--ink);
     box-shadow: var(--shadow);
+  }
+
+  .hero-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      radial-gradient(70% 60% at 82% 8%, rgb(217 92 35 / 22%), transparent 58%),
+      radial-gradient(60% 60% at 6% 96%, rgb(179 51 31 / 22%), transparent 60%),
+      linear-gradient(180deg, transparent 45%, rgb(20 17 13 / 40%));
+    pointer-events: none;
+  }
+
+  .hero-media img {
+    animation: kenburns 24s ease-in-out infinite alternate;
   }
 
   .hero-media img,
@@ -394,12 +438,15 @@
   }
 
   .button.primary {
-    background: var(--orange);
+    background: var(--accent);
     color: var(--cream);
+    box-shadow: 0 12px 30px rgb(217 92 35 / 24%);
   }
 
   .button.primary:hover {
-    background: var(--orange-2);
+    background: linear-gradient(115deg, var(--orange-2), var(--red-2));
+    transform: translateY(-2px);
+    box-shadow: 0 18px 44px rgb(217 92 35 / 32%);
   }
 
   .button.ghost {
@@ -975,17 +1022,18 @@
     min-height: 48px;
     padding: .75rem 1.25rem;
     border-radius: 999px;
-    background: var(--orange);
+    background: var(--accent);
     color: var(--cream);
-    box-shadow: 0 14px 34px rgb(20 17 13 / 26%);
+    box-shadow: 0 16px 38px rgb(217 92 35 / 34%);
     font-size: .9rem;
     font-weight: 600;
     text-decoration: none;
-    transition: background .2s ease, transform .15s ease;
+    transition: background .2s ease, transform .15s ease, box-shadow .2s ease;
   }
 
   .floating-contact:hover {
-    background: var(--orange-2);
+    background: linear-gradient(115deg, var(--orange-2), var(--red-2));
+    transform: translateY(-2px);
   }
 
   /* ---------- Footer ---------- */
@@ -1105,14 +1153,40 @@
 
   /* Category rows -> warm dark cards */
   .category-card {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(180deg, var(--ink-2), var(--ink));
     border-color: var(--line-dark);
     color: var(--cream);
   }
 
+  .category-card::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: 3px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform .4s cubic-bezier(.2, .8, .25, 1);
+  }
+
+  .category-card:hover::before {
+    transform: scaleY(1);
+  }
+
   .category-card:hover {
     border-color: rgb(217 92 35 / 55%);
-    box-shadow: 0 20px 50px rgb(0 0 0 / 38%);
+    box-shadow: 0 22px 52px rgb(0 0 0 / 42%);
+  }
+
+  .category-card span {
+    transition: color .3s ease;
+  }
+
+  .category-card:hover span {
+    color: var(--orange);
   }
 
   .category-card small {
@@ -1158,6 +1232,60 @@
     border-color: var(--orange);
     background: var(--orange);
     color: var(--cream);
+  }
+
+  /* Order form -> dark, on-brand (no more white block) */
+  .site .contact-form {
+    background: linear-gradient(180deg, var(--ink-2), var(--ink));
+    border-color: var(--line-dark);
+    color: var(--cream);
+  }
+
+  .site .contact-form .field label,
+  .site .contact-form label:not(.consent) {
+    color: var(--cream);
+  }
+
+  .site .contact-form input,
+  .site .contact-form textarea,
+  .site .contact-form select {
+    background: rgb(255 250 243 / 6%);
+    border-color: var(--line-dark);
+    color: var(--cream);
+  }
+
+  .site .contact-form input::placeholder,
+  .site .contact-form textarea::placeholder {
+    color: rgb(255 250 243 / 38%);
+  }
+
+  .site .contact-form input:focus,
+  .site .contact-form textarea:focus,
+  .site .contact-form select:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px var(--orange-soft);
+  }
+
+  .site .contact-form .consent {
+    color: rgb(255 250 243 / 66%);
+  }
+
+  .site .contact-form .consent a {
+    color: var(--orange);
+  }
+
+  /* Richer dual-tone glows on the dark feature bands */
+  .contact-section {
+    background:
+      radial-gradient(72% 80% at 100% 0%, rgb(217 92 35 / 24%), transparent 56%),
+      radial-gradient(60% 70% at 0% 100%, rgb(179 51 31 / 22%), transparent 56%),
+      var(--ink);
+  }
+
+  .reviews-section {
+    background:
+      radial-gradient(50% 60% at 50% 0%, rgb(217 92 35 / 12%), transparent 60%),
+      var(--ink);
   }
 
   /* Privacy / legal page on brand */
@@ -1505,21 +1633,38 @@
     }
   }
 
-  @keyframes gally-rise {
+  @keyframes letter-rise {
     0% {
       opacity: 0;
-      transform: translateY(.35em) scale(.96);
-      filter: blur(3px);
+      transform: translateY(.55em) rotate(5deg) scale(.86);
+      filter: blur(7px);
     }
-    65% {
+    60% {
       opacity: 1;
-      transform: translateY(-.03em) scale(1.015);
       filter: blur(0);
     }
     100% {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0) rotate(0) scale(1);
       filter: blur(0);
+    }
+  }
+
+  @keyframes glow-drift {
+    0% {
+      transform: translate(-9%, -7%) scale(1);
+    }
+    100% {
+      transform: translate(11%, 9%) scale(1.18);
+    }
+  }
+
+  @keyframes kenburns {
+    0% {
+      transform: scale(1.02) translate(0, 0);
+    }
+    100% {
+      transform: scale(1.13) translate(-2%, -1.5%);
     }
   }
 

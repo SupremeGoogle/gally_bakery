@@ -235,7 +235,18 @@ function HomePage({ catalog, setCatalog }) {
           <p className="hero-kicker">Family bakery | Florida</p>
           <h1>
             <span>{home.heroTitleBefore}</span>
-            <span className="hero-word">{home.heroAnimatedWord}</span>
+            <span className="hero-word" aria-label={home.heroAnimatedWord}>
+              {[...(home.heroAnimatedWord || '')].map((char, index) => (
+                <span
+                  key={index}
+                  className="hero-letter"
+                  style={{ animationDelay: `${0.25 + index * 0.11}s` }}
+                  aria-hidden="true"
+                >
+                  {char}
+                </span>
+              ))}
+            </span>
             <span>{home.heroTitleAfter}</span>
           </h1>
           <div className="hero-stats" aria-label="Bakery highlights">
