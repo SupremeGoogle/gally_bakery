@@ -242,7 +242,7 @@ function HomePage({ catalog, setCatalog }) {
                 <span
                   key={index}
                   className="hero-letter"
-                  style={{ animationDelay: `${0.25 + index * 0.11}s` }}
+                  style={{ animationDelay: `${0.15 + index * 0.18}s` }}
                   aria-hidden="true"
                 >
                   {char}

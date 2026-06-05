@@ -332,9 +332,7 @@
   .hero-letter {
     display: inline-block;
     white-space: pre;
-    transform-origin: 50% 100%;
-    animation: letter-rise .8s cubic-bezier(.2, .8, .25, 1.15) both;
-    text-shadow: 0 6px 30px rgb(239 94 27 / 35%);
+    animation: polaroid-develop 1.9s cubic-bezier(.33, 0, .2, 1) both;
   }
 
   .hero-stats {
@@ -1623,20 +1621,24 @@
     }
   }
 
-  @keyframes letter-rise {
+  /* Polaroid-style develop: text materialises in place — washed-out and
+     blurred at first, then sharpens and gains colour (no movement). */
+  @keyframes polaroid-develop {
     0% {
       opacity: 0;
-      transform: translateY(.55em) rotate(5deg) scale(.86);
-      filter: blur(7px);
+      filter: blur(12px) brightness(2.4) contrast(.35) saturate(0);
     }
-    60% {
-      opacity: 1;
-      filter: blur(0);
+    35% {
+      opacity: .55;
+      filter: blur(6px) brightness(1.6) contrast(.6) saturate(.3);
+    }
+    70% {
+      opacity: .9;
+      filter: blur(2px) brightness(1.15) contrast(.85) saturate(.7);
     }
     100% {
       opacity: 1;
-      transform: translateY(0) rotate(0) scale(1);
-      filter: blur(0);
+      filter: blur(0) brightness(1) contrast(1) saturate(1);
     }
   }
 
