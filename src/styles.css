@@ -394,7 +394,8 @@
   .category-card img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    object-position: center;
   }
 
   /* ---------- Buttons ---------- */
@@ -516,10 +517,9 @@
   }
 
   .category-card img {
-    aspect-ratio: 1;
+    aspect-ratio: 1.3;
     min-inline-size: 0;
     border-radius: var(--radius-sm);
-    background: var(--paper-2);
     transition: transform .55s ease;
   }
 
