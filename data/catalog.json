@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-05",
+  "updatedAt": "2026-06-08",
   "business": {
     "name": "Gally Family Bakery",
     "tagline": "Family Bakery | Cakes | Macarons | Desserts",
@@ -81,18 +81,31 @@
       "title": "Cakes",
       "intro": "Custom cakes for birthdays, weddings and family celebrations. Choose a direction, flavors and inspiration, then we will help shape the design.",
       "image": "/assets/pdf-page07-01.webp",
-      "items": [
+      "sections": [
         {
-          "id": "cake-honey",
-          "name": "Honey Cake",
-          "description": "Delicate honey sponge layered with silky sour-cream filling.",
-          "image": "/assets/pdf-page07-02.webp"
+          "id": "celebration-cakes",
+          "title": "Celebration Cakes",
+          "description": "Layered cakes for birthdays, showers and everyday celebrations.",
+          "flavors": [
+            "Vanilla",
+            "Chocolate",
+            "Red Velvet",
+            "Honey Cake",
+            "Lemon",
+            "Strawberry"
+          ]
         },
         {
-          "id": "cake-celebration",
-          "name": "Celebration Cake",
-          "description": "Custom-decorated cake made for birthdays and special occasions.",
-          "image": "/assets/pdf-page07-01.webp"
+          "id": "wedding-cakes",
+          "title": "Wedding Cakes",
+          "description": "Elegant cakes for intimate weddings and sweet reception tables.",
+          "flavors": [
+            "Vanilla Bean",
+            "Chocolate Ganache",
+            "Pistachio Raspberry",
+            "Lemon Berry",
+            "Classic Honey"
+          ]
         }
       ]
     },
@@ -100,18 +113,21 @@
       "title": "Macarons",
       "intro": "Delicate almond shells with smooth fillings, made for gifts, dessert tables and celebrations.",
       "image": "/assets/pdf-page06-01.webp",
+      "flavors": [
+        "Vanilla",
+        "Strawberry",
+        "Pistachio",
+        "Chocolate",
+        "S'mores",
+        "Lemon",
+        "Raspberry"
+      ],
       "items": [
         {
-          "id": "macaron-classic",
-          "name": "Classic Macarons",
-          "description": "Crisp almond shells with a smooth ganache filling.",
-          "image": "/assets/pdf-page06-01.webp"
-        },
-        {
-          "id": "macaron-box",
-          "name": "Macaron Gift Box",
-          "description": "An assortment of flavors, boxed and ready for gifting.",
-          "image": "/assets/pdf-page06-01.webp"
+          "id": "item-1780916108045",
+          "name": "вафываыфв",
+          "description": "ывафывафывафы",
+          "image": "/assets/uploads/1780916118179-2026-06-07-14-13-12.png"
         }
       ]
     },
@@ -277,18 +293,27 @@
   ],
   "reviews": [
     {
+      "id": "review-1780686304654",
+      "name": "Client",
+      "text": "Add review text here.",
+      "caption": "Custom order",
+      "rating": "5.0"
+    },
+    {
       "id": "review-1",
       "name": "Private client",
       "text": "Beautiful cake, smooth communication and exactly the feeling we wanted for the celebration.",
       "caption": "Custom cake order",
-      "rating": "5.0"
+      "rating": "5.0",
+      "image": "/assets/pdf-page07-01.webp"
     },
     {
       "id": "review-2",
       "name": "Family celebration",
       "text": "The macarons were delicate, fresh and gone almost immediately.",
       "caption": "Macaron box",
-      "rating": "5.0"
+      "rating": "5.0",
+      "image": "/assets/pdf-page06-01.webp"
     }
   ]
 }
