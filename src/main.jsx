@@ -393,16 +393,15 @@ function DessertsPage({ catalog }) {
       ) : (
         <div className="dessert-grid">
           {items.map((item) => (
-            <a className="dessert-card" href="#contact" key={item.id}>
+            <article className="dessert-card" key={item.id}>
               <div className="dessert-photo">
                 <img src={asset(item.image)} alt={item.name} loading="lazy" decoding="async" />
                 <span className="dessert-tag">To order</span>
               </div>
               <div className="dessert-body">
                 <h2>{item.name}</h2>
-                <span className="dessert-cta">Order <ChevronRight size={16} /></span>
               </div>
-            </a>
+            </article>
           ))}
         </div>
       )}

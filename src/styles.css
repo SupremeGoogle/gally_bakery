@@ -967,33 +967,15 @@
   }
 
   .dessert-body {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: .5rem;
     padding: 1rem 1.1rem 1.15rem;
   }
 
   .dessert-card h2 {
-    font-size: 1.25rem;
-  }
-
-  .dessert-cta {
-    display: inline-flex;
-    flex: none;
-    align-items: center;
-    gap: .15rem;
     color: var(--orange);
-    font-size: .8rem;
+    font-family: var(--serif);
+    font-size: 1.45rem;
     font-weight: 600;
-    opacity: 0;
-    transform: translateX(-5px);
-    transition: opacity .25s ease, transform .25s ease;
-  }
-
-  .dessert-card:hover .dessert-cta {
-    opacity: 1;
-    transform: translateX(0);
+    text-decoration: none;
   }
 
   /* ---------- Product catalog (cakes / macarons) ---------- */
@@ -1458,8 +1440,7 @@
     box-shadow: 0 20px 50px rgb(0 0 0 / 30%);
   }
 
-  .detail-panel h2,
-  .dessert-card h2 {
+  .detail-panel h2 {
     color: var(--cream);
   }
 
