@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-08",
+  "updatedAt": "2026-06-10",
   "business": {
     "name": "Gally Family Bakery",
     "tagline": "Family Bakery | Cakes | Macarons | Desserts",
@@ -122,14 +122,7 @@
         "Lemon",
         "Raspberry"
       ],
-      "items": [
-        {
-          "id": "item-1780916108045",
-          "name": "вафываыфв",
-          "description": "ывафывафывафы",
-          "image": "/assets/uploads/1780916118179-2026-06-07-14-13-12.png"
-        }
-      ]
+      "items": []
     },
     "desserts": {
       "title": "Desserts",
